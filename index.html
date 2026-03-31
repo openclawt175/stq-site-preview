@@ -1,644 +1,1092 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>STQ Capital Partners</title>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STQ Capital Partners — Tax-Aware Wealth Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1B2E4B;
-    --navy-light: #2a4570;
-    --cream: #F0EFEB;
-    --cream-dark: #E6E4DE;
-    --muted: rgba(27,46,75,0.45);
-  }
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --navy: #1B2E4B;
+  --navy-light: #2a4570;
+  --navy-dark: #0f1e33;
+  --cream: #F0EFEB;
+  --cream-dark: #E6E4DE;
+  --cream-mid: #DAD8D1;
+  --white: #FFFFFF;
+  --text-primary: #1B2E4B;
+  --text-secondary: #5a6a7e;
+  --text-light: rgba(240, 239, 235, 0.7);
+  --font-heading: 'Chakra Petch', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  body {
-    background: var(--cream);
-    color: var(--navy);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-  /* ── NAV ── */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 32px 60px;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: var(--cream);
-    border-bottom: 1px solid rgba(27,46,75,0.08);
-  }
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  .logo-mark {
-    width: 130px;
-    height: 52px;
-    flex-shrink: 0;
-  }
+/* Grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(27, 46, 75, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 46, 75, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
+/* ========== UTILITY ========== */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 64px); position: relative; z-index: 1; }
+.section-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 20px;
+}
+.section-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--navy);
+}
 
-  .nav-links a {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 2.5px;
-    color: var(--navy);
-    opacity: 0.55;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: opacity 0.2s;
-  }
+/* ========== ANIMATIONS ========== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scaleY(0.95); }
+  to { opacity: 1; transform: scaleY(1); }
+}
 
-  .nav-links a:hover { opacity: 1; }
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
 
-  .nav-cta {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--navy);
-    text-transform: uppercase;
-    border: 1.5px solid var(--navy);
-    padding: 9px 20px;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-  }
+/* ========== NAV ========== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(240, 239, 235, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(27, 46, 75, 0.08);
+  transition: background 0.3s ease;
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.nav-logo span { font-weight: 400; color: var(--text-secondary); }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--navy); }
 
-  .nav-cta:hover {
-    background: var(--navy);
-    color: var(--cream);
-  }
+.btn {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary {
+  background: var(--navy);
+  color: var(--cream);
+}
+.btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid rgba(27, 46, 75, 0.25);
+}
+.btn-secondary:hover { border-color: var(--navy); background: rgba(27, 46, 75, 0.04); }
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  padding: 12px 0;
+}
+.btn-ghost:hover { opacity: 0.7; }
+.btn-white {
+  background: var(--cream);
+  color: var(--navy);
+}
+.btn-white:hover { background: var(--white); transform: translateY(-1px); }
+.btn-outline-white {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(240, 239, 235, 0.3);
+}
+.btn-outline-white:hover { border-color: var(--cream); background: rgba(240, 239, 235, 0.08); }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 60px 80px;
-    position: relative;
-    overflow: hidden;
-  }
+/* Mobile menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--navy);
+  transition: all 0.3s ease;
+}
 
-  .hero-bg-text {
-    position: absolute;
-    top: 50%;
-    right: -20px;
-    transform: translateY(-50%);
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: clamp(120px, 18vw, 220px);
-    font-weight: 600;
-    color: var(--navy);
-    opacity: 0.04;
-    letter-spacing: -8px;
-    user-select: none;
-    white-space: nowrap;
-    animation: fadeIn 1.5s ease forwards;
-  }
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.hero-watermark {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(20rem, 35vw, 40rem);
+  color: rgba(27, 46, 75, 0.03);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  user-select: none;
+  pointer-events: none;
+}
+.hero-content { max-width: 680px; padding: 80px 0; }
+.hero-tag {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  animation: slideUp 0.8s var(--ease-out) 0.2s both;
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  margin-bottom: 24px;
+  animation: slideUp 0.8s var(--ease-out) 0.35s both;
+}
+.hero-sub {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin-bottom: 40px;
+  animation: slideUp 0.8s var(--ease-out) 0.5s both;
+}
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: slideUp 0.8s var(--ease-out) 0.65s both;
+}
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(27,46,75,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(27,46,75,0.04) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-  }
+/* ========== STATS STRIP ========== */
+.stats {
+  background: var(--navy);
+  padding: 56px 0;
+  position: relative;
+  z-index: 1;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  text-align: center;
+  padding: 8px 24px;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: rgba(240, 239, 235, 0.12);
+}
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
 
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-    animation: slideUp 0.9s ease forwards;
-    opacity: 0;
-    animation-delay: 0.2s;
-  }
+/* ========== SPLIT LAYOUT (Framework, Solutions, About) ========== */
+.split-section { padding: 120px 0; }
+.split-section + .split-section { padding-top: 0; }
+.split-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.split-label { padding-top: 8px; position: sticky; top: 100px; }
 
-  .hero-tag {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.45;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+/* ========== S.T.Q. FRAMEWORK ========== */
+.framework-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+.framework-card {
+  padding: 40px 32px;
+  border: 1px solid rgba(27, 46, 75, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.4s var(--ease);
+}
+.framework-card:hover {
+  background: var(--white);
+  border-color: rgba(27, 46, 75, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(27, 46, 75, 0.06);
+}
+.framework-letter {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.framework-word {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(27, 46, 75, 0.08);
+}
+.framework-card p {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
 
-  .hero-tag::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1px;
-    background: var(--navy);
-    opacity: 0.4;
-  }
+/* ========== SOLUTIONS ACCORDION ========== */
+.solutions-list { width: 100%; }
+.solutions-list details {
+  border-bottom: 1px solid rgba(27, 46, 75, 0.1);
+}
+.solutions-list details:first-child {
+  border-top: 1px solid rgba(27, 46, 75, 0.1);
+}
+.solutions-list summary {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 24px 40px 24px 0;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  transition: color 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.solutions-list summary::-webkit-details-marker { display: none; }
+.solutions-list summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  transition: transform 0.3s var(--ease);
+}
+.solutions-list details[open] summary::after {
+  content: '−';
+}
+.solutions-list summary:hover { color: var(--navy-light); }
+.solutions-list details .solution-content {
+  padding: 0 0 28px 0;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 640px;
+  animation: scaleIn 0.3s var(--ease) both;
+  transform-origin: top;
+}
 
-  h1 {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: clamp(38px, 5.5vw, 68px);
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.5px;
-    color: var(--navy);
-    margin-bottom: 32px;
-  }
+/* ========== TAX CHART ========== */
+.tax-chart-section {
+  background: var(--cream-dark);
+  padding: 120px 0;
+  position: relative;
+  z-index: 1;
+}
+.tax-chart-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.tax-chart-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.tax-chart-header p {
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.chart-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 8px;
+  padding: 48px;
+  border: 1px solid rgba(27, 46, 75, 0.06);
+}
+.chart-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 80px;
+  height: 340px;
+  position: relative;
+  padding-bottom: 60px;
+  margin-bottom: 32px;
+}
+.chart-visual::before {
+  content: '';
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(27, 46, 75, 0.1);
+}
+/* Y-axis labels */
+.chart-visual::after {
+  content: '$1M start';
+  position: absolute;
+  bottom: 65px;
+  left: 0;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+}
+.chart-bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+.chart-bar {
+  width: 100px;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: height 1.5s var(--ease-out);
+}
+.chart-bar-taxable {
+  height: 140px;
+  background: linear-gradient(180deg, rgba(27, 46, 75, 0.25) 0%, rgba(27, 46, 75, 0.12) 100%);
+  border: 1px solid rgba(27, 46, 75, 0.15);
+  border-bottom: none;
+}
+.chart-bar-taxaware {
+  height: 260px;
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
+}
+.chart-bar-value {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+.chart-bar-taxable .chart-bar-value { color: var(--text-secondary); }
+.chart-bar-taxaware .chart-bar-value { color: var(--navy); }
+.chart-bar-label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.4;
+  position: absolute;
+  bottom: -52px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.chart-footnote {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin-top: 8px;
+}
+.chart-diff {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(27, 46, 75, 0.08);
+}
+.chart-diff-number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+.chart-diff-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
 
-  h1 em {
-    font-style: normal;
-    opacity: 0.3;
-  }
+/* ========== ABOUT ========== */
+.about-text {
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  max-width: 640px;
+}
 
-  .hero-body {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--navy);
-    opacity: 0.6;
-    max-width: 480px;
-    margin-bottom: 48px;
-  }
+/* ========== WHY US ========== */
+.why-section { padding: 120px 0; background: var(--cream); }
+.why-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.why-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+.why-card {
+  padding: 40px 28px;
+  border: 1px solid rgba(27, 46, 75, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.4s var(--ease);
+}
+.why-card:hover {
+  background: var(--white);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(27, 46, 75, 0.06);
+}
+.why-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+.why-card p {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
 
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
+/* ========== CTA ========== */
+.cta-section {
+  background: var(--navy);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.cta-section::before {
+  content: 'STQ';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20rem;
+  color: rgba(240, 239, 235, 0.02);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.cta-section p {
+  font-size: 1.0625rem;
+  color: var(--text-light);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-  .btn-primary {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    background: var(--navy);
-    color: var(--cream);
-    padding: 14px 32px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
+/* ========== NEWSLETTER ========== */
+.newsletter-section {
+  padding: 80px 0;
+  background: var(--cream-dark);
+  position: relative;
+  z-index: 1;
+}
+.newsletter-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.newsletter-inner h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.newsletter-inner p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+}
+.newsletter-form input {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 14px 20px;
+  border: 1px solid rgba(27, 46, 75, 0.15);
+  border-radius: 4px;
+  background: var(--white);
+  color: var(--navy);
+  width: 300px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.newsletter-form input::placeholder { color: var(--text-secondary); opacity: 0.6; }
+.newsletter-form input:focus { border-color: var(--navy); }
 
-  .btn-primary:hover { opacity: 0.85; }
+/* ========== FOOTER ========== */
+footer {
+  background: var(--navy-dark);
+  padding: 48px 0 32px;
+  position: relative;
+  z-index: 1;
+}
+.footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(240, 239, 235, 0.08);
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.footer-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--cream);
+  letter-spacing: 0.03em;
+}
+.footer-logo span { font-weight: 400; color: rgba(240, 239, 235, 0.5); }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a {
+  font-size: 0.8125rem;
+  color: rgba(240, 239, 235, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: var(--cream); }
+.footer-copy {
+  font-size: 0.8125rem;
+  color: rgba(240, 239, 235, 0.35);
+}
+.footer-disclaimer {
+  margin-top: 24px;
+  padding-top: 0;
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  color: rgba(240, 239, 235, 0.2);
+  max-width: 900px;
+}
 
-  .btn-secondary {
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.5;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .split-grid { grid-template-columns: 1fr; gap: 32px; }
+  .split-label { position: static; }
+  .framework-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .stat-item:nth-child(odd)::after { display: block; }
+}
 
-  .btn-secondary:hover { opacity: 1; }
+@media (max-width: 768px) {
+  .nav-links, .nav-cta-desktop { display: none; }
+  .nav-toggle { display: flex; }
+  .hero h1 { font-size: 2.5rem; }
+  .framework-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+  .stat-item::after { display: none !important; }
+  .stat-item { padding: 16px 0; }
+  .chart-visual { gap: 40px; height: 280px; }
+  .chart-bar { width: 80px; }
+  .chart-bar-taxable { height: 110px; }
+  .chart-bar-taxaware { height: 210px; }
+  .chart-wrapper { padding: 32px 24px; }
+  .newsletter-inner { flex-direction: column; text-align: center; align-items: center; }
+  .newsletter-form { flex-direction: column; width: 100%; }
+  .newsletter-form input { width: 100%; }
+  .footer-main { flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+  .hero-buttons { flex-direction: column; align-items: flex-start; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .split-section { padding: 80px 0; }
+  .why-section { padding: 80px 0; }
+}
 
-  /* ── STATS STRIP ── */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid rgba(27,46,75,0.12);
-    border-bottom: 1px solid rgba(27,46,75,0.12);
-    margin: 0 60px;
-    animation: slideUp 0.9s ease forwards;
-    opacity: 0;
-    animation-delay: 0.5s;
-  }
+@media (max-width: 480px) {
+  .hero { min-height: auto; padding-top: 100px; padding-bottom: 40px; }
+  .hero-content { padding: 40px 0; }
+  .chart-visual { flex-direction: row; gap: 32px; }
+}
 
-  .stat {
-    padding: 36px 0;
-    border-right: 1px solid rgba(27,46,75,0.12);
-  }
-
-  .stat:last-child { border-right: none; }
-  .stat:not(:first-child) { padding-left: 48px; }
-
-  .stat-num {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 34px;
-    font-weight: 600;
-    letter-spacing: -1px;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.45;
-  }
-
-  /* ── PILLARS ── */
-  .pillars {
-    padding: 100px 60px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .pillars-label {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.45;
-    padding-top: 6px;
-    position: sticky;
-    top: 120px;
-  }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px;
-    background: rgba(27,46,75,0.10);
-    border: 1px solid rgba(27,46,75,0.10);
-  }
-
-  .pillar {
-    background: var(--cream);
-    padding: 40px 32px;
-    transition: background 0.2s;
-  }
-
-  .pillar:hover { background: var(--cream-dark); }
-
-  .pillar-letter {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 36px;
-    font-weight: 600;
-    color: var(--navy);
-    opacity: 0.12;
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  .pillar-title {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--navy);
-    margin-bottom: 12px;
-  }
-
-  .pillar-body {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--navy);
-    opacity: 0.55;
-  }
-
-  /* ── APPROACH ── */
-  .approach {
-    padding: 100px 60px;
-    border-top: 1px solid rgba(27,46,75,0.10);
-  }
-
-  .approach-header {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-    margin-bottom: 60px;
-  }
-
-  .approach-label {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.45;
-    padding-top: 6px;
-  }
-
-  .approach-intro {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--navy);
-    opacity: 0.6;
-    max-width: 600px;
-  }
-
-  .capabilities {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(27,46,75,0.10);
-    border: 1px solid rgba(27,46,75,0.10);
-  }
-
-  .capability {
-    background: var(--cream);
-    padding: 40px 32px;
-    transition: background 0.2s;
-  }
-
-  .capability:hover { background: var(--cream-dark); }
-
-  .capability-num {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--navy);
-    opacity: 0.25;
-    margin-bottom: 16px;
-  }
-
-  .capability-title {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: var(--navy);
-    margin-bottom: 12px;
-  }
-
-  .capability-body {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--navy);
-    opacity: 0.55;
-  }
-
-  /* ── ABOUT ── */
-  .about {
-    padding: 100px 60px;
-    border-top: 1px solid rgba(27,46,75,0.10);
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-  }
-
-  .about-label {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.45;
-    padding-top: 6px;
-  }
-
-  .about-text {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--navy);
-    opacity: 0.6;
-    max-width: 600px;
-  }
-
-  .about-text strong {
-    font-weight: 400;
-    opacity: 1;
-    color: var(--navy);
-  }
-
-  /* ── CTA SECTION ── */
-  .cta-section {
-    padding: 80px 60px;
-    border-top: 1px solid rgba(27,46,75,0.10);
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 28px;
-    font-weight: 500;
-    color: var(--navy);
-    margin-bottom: 16px;
-  }
-
-  .cta-section p {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--navy);
-    opacity: 0.5;
-    margin-bottom: 32px;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid rgba(27,46,75,0.10);
-    padding: 40px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: var(--navy);
-    opacity: 0.35;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 24px;
-  }
-
-  .footer-links a {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 1.5px;
-    color: var(--navy);
-    opacity: 0.3;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .footer-links a:hover { opacity: 0.6; }
-
-  .footer-copy {
-    font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 1.5px;
-    color: var(--navy);
-    opacity: 0.3;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.04; }
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* Mobile nav overlay */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-nav.active { display: flex; opacity: 1; }
+.mobile-nav a {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--navy);
+  cursor: pointer;
+  padding: 8px;
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ========== NAV ========== -->
 <nav>
-  <svg class="logo-mark" viewBox="0 0 200 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <text x="0" y="32" font-family="'Chakra Petch',sans-serif" font-size="34" font-weight="600" letter-spacing="3" fill="#1B2E4B">STQ</text>
-    <text x="0" y="50" font-family="'DM Sans',sans-serif" font-size="11" font-weight="400" letter-spacing="2.5" fill="#1B2E4B" opacity="0.50">Capital Partners</text>
-  </svg>
-  <ul class="nav-links">
-    <li><a href="#approach">Our Approach</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#insights">Insights</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Schedule a Meeting</a>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">STQ <span>/ Capital Partners</span></a>
+    <div class="nav-links">
+      <a href="#solutions">Solutions</a>
+      <a href="#about">About</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn btn-primary nav-cta-desktop">Schedule a Meeting</a>
+    <button class="nav-toggle" onclick="document.querySelector('.mobile-nav').classList.add('active')" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
+<!-- Mobile nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close" onclick="this.parentElement.classList.remove('active')" aria-label="Close menu">✕</button>
+  <a href="#solutions" onclick="this.parentElement.classList.remove('active')">Solutions</a>
+  <a href="#about" onclick="this.parentElement.classList.remove('active')">About</a>
+  <a href="#insights" onclick="this.parentElement.classList.remove('active')">Insights</a>
+  <a href="#contact" onclick="this.parentElement.classList.remove('active')">Contact</a>
+  <a href="#contact" class="btn btn-primary" onclick="this.parentElement.classList.remove('active')">Schedule a Meeting</a>
+</div>
+
+<!-- ========== HERO ========== -->
 <section class="hero">
-  <div class="hero-bg-text">STQ</div>
-  <div class="hero-content">
-    <p class="hero-tag">Tax-Aware Wealth Management</p>
-    <h1>Most advisors focus<br/>on what you earn<em>.</em><br/>We focus on what<br/>you keep<em>.</em></h1>
-    <p class="hero-body">STQ Capital Partners builds tax-aware, options-enhanced portfolios for high earners who refuse to lose 1–2% annually to avoidable tax drag. Institutional-grade strategies. Personal attention. After-tax results.</p>
-    <div class="hero-actions">
-      <a href="#approach" class="btn-primary">Our Approach</a>
-      <a href="#contact" class="btn-secondary">Free Portfolio Review →</a>
+  <div class="hero-watermark">STQ</div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">Tax-Aware Wealth Management</div>
+      <h1>You've built it.<br>Now protect it.</h1>
+      <p class="hero-sub">Tax-aware derivative strategies engineered around what you keep — not what you earn.</p>
+      <div class="hero-buttons">
+        <a href="#solutions" class="btn btn-primary">Our Solutions</a>
+        <a href="#contact" class="btn btn-secondary">Free Portfolio Review →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
+<!-- ========== STATS ========== -->
 <section class="stats">
-  <div class="stat">
-    <div class="stat-num">1–2%</div>
-    <div class="stat-label">Avg. annual tax drag eliminated</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">$1T+</div>
-    <div class="stat-label">Tax-optimization industry AUM</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">15+</div>
-    <div class="stat-label">Years institutional experience</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Independent &amp; conflict-free</div>
-  </div>
-</section>
-
-<!-- S.T.Q. PILLARS -->
-<section class="pillars">
-  <div class="pillars-label">Our Framework</div>
-  <div class="pillars-grid">
-    <div class="pillar">
-      <div class="pillar-letter">S</div>
-      <div class="pillar-title">Strategic</div>
-      <div class="pillar-body">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-letter">T</div>
-      <div class="pillar-title">Tactical</div>
-      <div class="pillar-body">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-letter">Q</div>
-      <div class="pillar-title">Quantitative</div>
-      <div class="pillar-body">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</div>
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">1–2%</div>
+        <div class="stat-label">Avg annual tax drag eliminated</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">$1T+</div>
+        <div class="stat-label">Tax-optimization industry AUM</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Years institutional experience</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Independent & conflict-free</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- APPROACH / CAPABILITIES -->
-<section class="approach" id="approach">
-  <div class="approach-header">
-    <div class="approach-label">What We Do</div>
-    <div class="approach-intro">Every portfolio we build is engineered to minimize tax drag while maximizing after-tax wealth. We don't sell products — we solve problems your current advisor isn't addressing.</div>
-  </div>
-  <div class="capabilities">
-    <div class="capability">
-      <div class="capability-num">01</div>
-      <div class="capability-title">Tax-Aware Portfolio Design</div>
-      <div class="capability-body">Asset location, vehicle selection, and strategic positioning to keep more of every dollar working for you. Coordinated with your CPA.</div>
-    </div>
-    <div class="capability">
-      <div class="capability-num">02</div>
-      <div class="capability-title">Advanced Tax-Loss Harvesting</div>
-      <div class="capability-body">Long-short strategies that generate losses in any market — not just the first few years. Losses never expire. We stockpile them for when you need them most.</div>
-    </div>
-    <div class="capability">
-      <div class="capability-num">03</div>
-      <div class="capability-title">The Fortress Trade</div>
-      <div class="capability-body">Our signature SPX options structure: absorb the first 15% of any market drop while keeping unlimited upside. Your portfolio sits inside a fortress.</div>
-    </div>
-    <div class="capability">
-      <div class="capability-num">04</div>
-      <div class="capability-title">Synthetic Lending</div>
-      <div class="capability-body">Borrow against your portfolio at near-Treasury rates through box spreads. No bank, no credit check, no 7% interest. Tax-deductible.</div>
-    </div>
-    <div class="capability">
-      <div class="capability-num">05</div>
-      <div class="capability-title">Concentrated Stock Solutions</div>
-      <div class="capability-body">Hedge, diversify, or unwind a single-stock position without triggering a massive tax bill. Protective puts, exchange fund replication, and synthetic forwards.</div>
-    </div>
-    <div class="capability">
-      <div class="capability-num">06</div>
-      <div class="capability-title">Alternatives &amp; Private Markets</div>
-      <div class="capability-body">Tax-aware placement of alternative investments in the right accounts. Real estate, private credit, venture — optimized for after-tax outcomes.</div>
+<!-- ========== S.T.Q. FRAMEWORK ========== -->
+<section class="split-section" id="framework">
+  <div class="container">
+    <div class="split-grid">
+      <div class="split-label">
+        <div class="section-label reveal">Our Framework</div>
+      </div>
+      <div class="framework-grid">
+        <div class="framework-card reveal">
+          <div class="framework-letter">S</div>
+          <div class="framework-word">Strategic</div>
+          <p>Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+        </div>
+        <div class="framework-card reveal reveal-delay-1">
+          <div class="framework-letter">T</div>
+          <div class="framework-word">Tactical</div>
+          <p>Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+        </div>
+        <div class="framework-card reveal reveal-delay-2">
+          <div class="framework-letter">Q</div>
+          <div class="framework-word">Quantitative</div>
+          <p>Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-label">About</div>
-  <div class="about-text">
-    <strong>Akiva Glazerson</strong> spent over a decade at the highest levels of institutional finance — including PIMCO, Lido Advisors ($40B+ AUM), Royal Bank of Canada, UBS, and Deutsche Bank — building and optimizing multi-asset portfolios for the world's largest investors.<br/><br/>
-    He founded STQ Capital Partners on a simple observation: <strong>the strategies that protect institutional wealth are rarely applied to individual investors.</strong> Most advisors charge 1% to buy three ETFs. STQ charges less to build tax-aware, options-enhanced, institutionally-constructed portfolios custom-fit to your tax return.<br/><br/>
-    Akiva holds a B.S. from Yeshiva University, FINRA Series 7, 63, and 65 licenses, the CSRIC designation, and the CAIA alternatives credential. He's also a Brazilian Jiu-Jitsu black belt — because discipline on the mat translates to discipline in the portfolio.
+<!-- ========== SOLUTIONS ========== -->
+<section class="split-section" id="solutions">
+  <div class="container">
+    <div class="split-grid">
+      <div class="split-label">
+        <div class="section-label reveal">Our Solutions</div>
+      </div>
+      <div class="solutions-list reveal">
+        <details>
+          <summary>Tax-Aware Portfolio Construction</summary>
+          <div class="solution-content">Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets. We structure portfolios to limit avoidable taxable events and control turnover.</div>
+        </details>
+        <details>
+          <summary>Advanced Tax-Loss Harvesting</summary>
+          <div class="solution-content">Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more. Harvested losses never expire.</div>
+        </details>
+        <details>
+          <summary>The Fortress Trade</summary>
+          <div class="solution-content">Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</div>
+        </details>
+        <details>
+          <summary>Synthetic Portfolio Lending</summary>
+          <div class="solution-content">Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest. Rates your bank can't match.</div>
+        </details>
+        <details>
+          <summary>Concentrated Stock Solutions</summary>
+          <div class="solution-content">Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</div>
+        </details>
+        <details>
+          <summary>Alternatives & Private Markets</summary>
+          <div class="solution-content">Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</div>
+        </details>
+        <details>
+          <summary>Outcome Strategies</summary>
+          <div class="solution-content">Income, protection, and growth strategies using options to generate cash flow, buffer downside, or enhance participation in rising markets.</div>
+        </details>
+        <details>
+          <summary>Estate & Philanthropic Planning</summary>
+          <div class="solution-content">Coordinated estate strategies including DAFs, step-up planning, and tax-efficient wealth transfer in collaboration with your attorney and CPA.</div>
+        </details>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ========== TAX CHART ========== -->
+<section class="tax-chart-section">
+  <div class="container">
+    <div class="tax-chart-header reveal">
+      <h2>The Power of Tax Aware</h2>
+      <p>Tax-aware portfolios drive significantly stronger long-term growth.</p>
+    </div>
+    <div class="chart-wrapper reveal">
+      <div class="chart-visual">
+        <div class="chart-bar-group">
+          <div class="chart-bar chart-bar-taxable">
+            <div class="chart-bar-value">$4.2M</div>
+            <div class="chart-bar-label">12% return, taxable<br><span style="font-size:0.6875rem;opacity:0.7">37% CA rate</span></div>
+          </div>
+        </div>
+        <div class="chart-bar-group">
+          <div class="chart-bar chart-bar-taxaware">
+            <div class="chart-bar-value">$9.6M</div>
+            <div class="chart-bar-label">12% return, tax-aware<br><span style="font-size:0.6875rem;opacity:0.7">Deferred & optimized</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="chart-footnote">Hypothetical growth of $1M over 20 years. For illustrative purposes only.</p>
+      <div class="chart-diff">
+        <div class="chart-diff-number">+$5.4M</div>
+        <div class="chart-diff-label">Additional wealth preserved through tax-aware management</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="split-section" id="about">
+  <div class="container">
+    <div class="split-grid">
+      <div class="split-label">
+        <div class="section-label reveal">About</div>
+      </div>
+      <div class="about-text reveal">
+        <p>Akiva Glazerson spent over a decade at the highest levels of institutional finance — including PIMCO, Lido Advisors ($40B+ AUM), Royal Bank of Canada, UBS, and Deutsche Bank — building and optimizing multi-asset portfolios for the world's largest investors.</p>
+        <br>
+        <p>He founded STQ Capital Partners on a simple observation: the strategies that protect institutional wealth are rarely applied to individual investors. Most advisors charge 1% to buy three ETFs. STQ charges less to build tax-aware, options-enhanced, institutionally-constructed portfolios custom-fit to your tax return.</p>
+        <br>
+        <p>Akiva holds a B.S. from Yeshiva University, FINRA Series 7, 63, and 65 licenses, the CSRIC designation, and the CAIA alternatives credential. He's also a Brazilian Jiu-Jitsu black belt — because discipline on the mat translates to discipline in the portfolio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY US ========== -->
+<section class="why-section">
+  <div class="container">
+    <div class="why-header reveal">
+      <h2>Why STQ</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <h3>Independence</h3>
+        <p>No PE ownership, no product quotas, no conflicts. We sit on the same side of the table as you.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <h3>Integrity</h3>
+        <p>Open architecture, full transparency, fiduciary at all times. We don't build products or guide clients into anything that serves us.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <h3>Innovation</h3>
+        <p>Technology-forward operations, cutting-edge tax products, and strategies most advisors can't execute.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <h3>Individuality</h3>
+        <p>Every portfolio is tailored to your tax situation, income, liquidity, and objectives. No cookie cutters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
 <section class="cta-section" id="contact">
-  <h2>Send us your statement<em>.</em></h2>
-  <p>We'll show you what you're missing. No commitment. No sales pitch. Just the numbers.</p>
-  <a href="mailto:akiva.glazerson@stqcap.com" class="btn-primary">Free Portfolio Review</a>
+  <div class="container">
+    <div class="reveal">
+      <h2>Send us your statement.</h2>
+      <p>We'll show you what you're missing. No commitment. No sales pitch. Just the numbers.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-white">Free Portfolio Review</a>
+        <a href="#" class="btn btn-outline-white">Schedule a Meeting</a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">STQ</div>
-  <div class="footer-links">
-    <a href="#">LinkedIn</a>
-    <a href="#">Newsletter</a>
-    <a href="mailto:akiva.glazerson@stqcap.com">Contact</a>
+<!-- ========== NEWSLETTER ========== -->
+<section class="newsletter-section" id="insights">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div>
+        <h3>Stay Informed</h3>
+        <p>Tax-aware insights and market perspectives, delivered monthly.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="your@email.com" aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
   </div>
-  <div class="footer-copy">© 2026 STQ Capital Partners. All rights reserved.</div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-logo">STQ <span>/ Capital Partners</span></div>
+      <div class="footer-links">
+        <a href="#">LinkedIn</a>
+        <a href="#">Newsletter</a>
+        <a href="#">Contact</a>
+        <a href="#">Client Login</a>
+      </div>
+      <div class="footer-copy">© 2026 STQ Capital Partners</div>
+    </div>
+    <div class="footer-disclaimer">
+      STQ Capital Partners is a registered investment adviser. Information presented is for educational purposes only and does not intend to make an offer or solicitation for the sale or purchase of any specific securities, investments, or investment strategies. Investments involve risk and, unless otherwise stated, are not guaranteed. Past performance is not indicative of future results. Consult with a qualified financial adviser before making any investment decisions. All hypothetical performance shown is for illustrative purposes only.
+    </div>
+  </div>
 </footer>
+
+<!-- ========== SCROLL REVEAL ========== -->
+<script>
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+})();
+</script>
 
 </body>
 </html>
