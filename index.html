@@ -225,7 +225,7 @@ nav {
   transform: translateY(-50%);
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: clamp(12rem, 20vw, 24rem);
+  font-size: clamp(9rem, 16vw, 19rem);
   color: rgba(27, 46, 75, 0.03);
   line-height: 0.8;
   letter-spacing: -0.03em;
@@ -602,36 +602,29 @@ nav {
 
 /* ========== CTA ========== */
 .cta-section {
-  background: var(--navy);
+  background: var(--cream);
   padding: 120px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
   z-index: 1;
+  border-top: 1px solid rgba(27, 46, 75, 0.10);
 }
 .cta-section::before {
-  content: 'STQ';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 20rem;
-  color: rgba(240, 239, 235, 0.02);
-  pointer-events: none;
+  display: none;
 }
 .cta-section h2 {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
-  color: var(--cream);
+  color: var(--navy);
   margin-bottom: 20px;
   letter-spacing: -0.02em;
 }
 .cta-section p {
   font-size: 1.0625rem;
-  color: var(--text-light);
+  color: var(--navy);
+  opacity: 0.6;
   max-width: 520px;
   margin: 0 auto 40px;
   line-height: 1.7;
@@ -1031,7 +1024,7 @@ footer {
       <p>We'll show you what you're missing. No commitment. No sales pitch. Just the numbers.</p>
       <div class="cta-buttons">
         <a href="#" class="btn btn-white">Free Portfolio Review</a>
-        <a href="#" class="btn btn-outline-white">Schedule a Meeting</a>
+        <a href="#" class="btn btn-secondary">Schedule a Meeting</a>
       </div>
     </div>
   </div>
