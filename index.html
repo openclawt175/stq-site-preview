@@ -270,10 +270,12 @@ nav {
 
 /* ========== STATS STRIP ========== */
 .stats {
-  background: var(--navy);
+  background: var(--cream);
   padding: 56px 0;
   position: relative;
   z-index: 1;
+  border-top: 1px solid rgba(27, 46, 75, 0.12);
+  border-bottom: 1px solid rgba(27, 46, 75, 0.12);
 }
 .stats-grid {
   display: grid;
@@ -292,20 +294,21 @@ nav {
   top: 10%;
   height: 80%;
   width: 1px;
-  background: rgba(240, 239, 235, 0.12);
+  background: rgba(27, 46, 75, 0.12);
 }
 .stat-number {
   font-family: var(--font-heading);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
-  color: var(--cream);
+  color: var(--navy);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 .stat-label {
   font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: var(--text-light);
+  color: var(--navy);
+  opacity: 0.45;
   line-height: 1.5;
 }
 
@@ -602,29 +605,36 @@ nav {
 
 /* ========== CTA ========== */
 .cta-section {
-  background: var(--cream);
+  background: var(--navy);
   padding: 120px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  border-top: 1px solid rgba(27, 46, 75, 0.10);
 }
 .cta-section::before {
-  display: none;
+  content: 'STQ';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 20rem;
+  color: rgba(240, 239, 235, 0.02);
+  pointer-events: none;
 }
 .cta-section h2 {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
-  color: var(--navy);
+  color: var(--cream);
   margin-bottom: 20px;
   letter-spacing: -0.02em;
 }
 .cta-section p {
   font-size: 1.0625rem;
-  color: var(--navy);
-  opacity: 0.6;
+  color: var(--text-light);
   max-width: 520px;
   margin: 0 auto 40px;
   line-height: 1.7;
@@ -1024,7 +1034,7 @@ footer {
       <p>We'll show you what you're missing. No commitment. No sales pitch. Just the numbers.</p>
       <div class="cta-buttons">
         <a href="#" class="btn btn-white">Free Portfolio Review</a>
-        <a href="#" class="btn btn-secondary">Schedule a Meeting</a>
+        <a href="#" class="btn btn-outline-white">Schedule a Meeting</a>
       </div>
     </div>
   </div>
