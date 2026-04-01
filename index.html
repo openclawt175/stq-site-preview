@@ -1013,8 +1013,7 @@ footer {
   .stat-item:nth-child(odd)::after { display: block; }
 }
 
-@media (max-width: 768px) {
-  .nav-links, .nav-client-login {
+.nav-client-login {
   font-family: var(--font-heading);
   font-size: 0.625rem;
   font-weight: 500;
@@ -1030,7 +1029,9 @@ footer {
   border-color: rgba(27, 46, 75, 0.5);
   background: rgba(27, 46, 75, 0.03);
 }
-.nav-cta-desktop { display: none; }
+@media (max-width: 768px) {
+  .nav-links, .nav-client-login { display: none; }
+  .nav-cta-desktop { display: none; }
   .nav-toggle { display: flex; }
   .hero h1 { font-size: 2.5rem; }
   .framework-grid { grid-template-columns: 1fr; }
