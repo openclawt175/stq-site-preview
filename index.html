@@ -325,7 +325,164 @@ nav {
 }
 .split-label { padding-top: 8px; position: sticky; top: 100px; }
 
-/* ========== S.T.Q. FRAMEWORK (Giant Expandable) ========== */
+/* ========== S.T.Q. FRAMEWORK (Stepper) ========== */
+.stepper-section { padding: 100px 0; }
+.stepper-container { max-width: 100%; padding: 0 64px; }
+.stepper-header { margin-bottom: 48px; }
+.stepper-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-top: 16px;
+  letter-spacing: -0.5px;
+}
+.stepper-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+  padding: 0 40px;
+}
+.stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.stepper-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(27,46,75,0.2);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(27,46,75,0.3);
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.stepper-step.active .stepper-circle {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+  transform: scale(1.08);
+  box-shadow: 0 4px 20px rgba(27,46,75,0.2);
+}
+.stepper-step.completed .stepper-circle {
+  background: rgba(27,46,75,0.08);
+  border-color: rgba(27,46,75,0.25);
+  color: var(--navy);
+}
+.stepper-word {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.25;
+  margin-top: 12px;
+  transition: opacity 0.3s ease;
+}
+.stepper-step.active .stepper-word { opacity: 0.7; }
+.stepper-step.completed .stepper-word { opacity: 0.4; }
+.stepper-connector {
+  flex: 1;
+  height: 2px;
+  background: rgba(27,46,75,0.1);
+  position: relative;
+  margin: 0 -4px;
+  margin-bottom: 28px;
+}
+.stepper-fill {
+  position: absolute;
+  inset: 0;
+  background: rgba(27,46,75,0.25);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.stepper-connector.filled .stepper-fill { transform: scaleX(1); }
+.stepper-content {
+  background: var(--cream-dark);
+  border-radius: 20px;
+  padding: 56px 56px;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+}
+.stepper-watermark {
+  position: absolute;
+  right: -20px;
+  bottom: -40px;
+  font-family: var(--font-heading);
+  font-size: 240px;
+  font-weight: 700;
+  color: var(--navy);
+  opacity: 0.03;
+  line-height: 1;
+  pointer-events: none;
+}
+.stepper-body {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.stepper-body.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stepper-pill {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--navy);
+  opacity: 0.3;
+  border: 1px solid rgba(27,46,75,0.15);
+  border-radius: 20px;
+  padding: 6px 16px;
+  margin-bottom: 24px;
+}
+.stepper-content-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+.stepper-bar {
+  width: 40px;
+  height: 2.5px;
+  background: var(--navy);
+  opacity: 0.15;
+  margin-bottom: 20px;
+}
+.stepper-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--navy);
+  opacity: 0.6;
+  max-width: 560px;
+}
+@media (max-width: 768px) {
+  .stepper-container { padding: 0 24px; }
+  .stepper-content { padding: 40px 28px; }
+  .stepper-content-title { font-size: 24px; }
+  .stepper-watermark { font-size: 160px; }
+  .stepper-circle { width: 44px; height: 44px; font-size: 17px; }
+}
+
+/* ========== S.T.Q. FRAMEWORK (old) ========== */
 .fw-section { padding: 100px 0; }
 #framework .container { max-width: 100%; padding: 0 64px; }
 .fw-grid {
@@ -1152,33 +1309,38 @@ footer {
   </div>
 </section>
 
-<!-- ========== S.T.Q. FRAMEWORK ========== -->
-<section class="split-section" id="framework">
-  <div class="container">
-    <div class="section-label reveal" style="margin-bottom: 40px;">Our Framework</div>
-    <div class="framework-grid">
-        <div class="framework-card reveal" data-fw="0">
-          <div class="framework-letter">S</div>
-          <div class="framework-word">Strategic</div>
-          <div class="framework-toggle"></div><div class="framework-desc-wrap">
-            <p class="framework-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
-          </div>
-        </div>
-        <div class="framework-card reveal reveal-delay-1" data-fw="1">
-          <div class="framework-letter">T</div>
-          <div class="framework-word">Tactical</div>
-          <div class="framework-toggle"></div><div class="framework-desc-wrap">
-            <p class="framework-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
-          </div>
-        </div>
-        <div class="framework-card reveal reveal-delay-2" data-fw="2">
-          <div class="framework-letter">Q</div>
-          <div class="framework-word">Quantitative</div>
-          <div class="framework-toggle"></div><div class="framework-desc-wrap">
-            <p class="framework-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
-          </div>
-        </div>
+<!-- ========== S.T.Q. FRAMEWORK (Stepper) ========== -->
+<section class="stepper-section" id="framework">
+  <div class="stepper-container">
+    <div class="stepper-header">
+      <div class="section-label reveal">Our Framework</div>
+      <h2 class="stepper-title">Three pillars. One unified strategy.</h2>
+    </div>
+    <div class="stepper-nav">
+      <div class="stepper-step active" data-step="0" onclick="goStep(0)">
+        <div class="stepper-circle">S</div>
+        <div class="stepper-word">Strategic</div>
       </div>
+      <div class="stepper-connector" id="conn0"><div class="stepper-fill"></div></div>
+      <div class="stepper-step" data-step="1" onclick="goStep(1)">
+        <div class="stepper-circle">T</div>
+        <div class="stepper-word">Tactical</div>
+      </div>
+      <div class="stepper-connector" id="conn1"><div class="stepper-fill"></div></div>
+      <div class="stepper-step" data-step="2" onclick="goStep(2)">
+        <div class="stepper-circle">Q</div>
+        <div class="stepper-word">Quantitative</div>
+      </div>
+    </div>
+    <div class="stepper-content">
+      <div class="stepper-watermark" id="stepperWatermark">S.</div>
+      <div class="stepper-body" id="stepperBody">
+        <div class="stepper-pill" id="stepperPill">The Foundation</div>
+        <div class="stepper-content-title" id="stepperTitle">Strategic</div>
+        <div class="stepper-bar"></div>
+        <div class="stepper-desc" id="stepperDesc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1397,15 +1559,37 @@ footer {
 </script>
 
 <script>
-// Framework expandable
-const fwCards = document.querySelectorAll('.framework-card');
-fwCards.forEach(card => {
-  card.addEventListener('click', () => {
-    const wasActive = card.classList.contains('active');
-    fwCards.forEach(c => c.classList.remove('active'));
-    if (!wasActive) card.classList.add('active');
+// Framework stepper
+const stepperPillars = [
+  { letter: 'S', title: 'Strategic', pill: 'The Foundation', desc: 'Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.' },
+  { letter: 'T', title: 'Tactical', pill: 'The Execution', desc: 'Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.' },
+  { letter: 'Q', title: 'Quantitative', pill: 'The Proof', desc: 'Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.' }
+];
+let currentStep = 0;
+const stepEls = document.querySelectorAll('.stepper-step');
+const connEls = [document.getElementById('conn0'), document.getElementById('conn1')];
+const stepBody = document.getElementById('stepperBody');
+function goStep(index) {
+  if (index < 0 || index > 2) return;
+  currentStep = index;
+  stepEls.forEach((s, i) => {
+    s.classList.remove('active', 'completed');
+    if (i === index) s.classList.add('active');
+    else if (i < index) s.classList.add('completed');
   });
-});
+  connEls.forEach((c, i) => { if(c) c.classList.toggle('filled', i < index); });
+  stepBody.classList.remove('visible');
+  setTimeout(() => {
+    const p = stepperPillars[index];
+    document.getElementById('stepperPill').textContent = p.pill;
+    document.getElementById('stepperTitle').textContent = p.title;
+    document.getElementById('stepperDesc').textContent = p.desc;
+    document.getElementById('stepperWatermark').textContent = p.letter + '.';
+    stepBody.classList.add('visible');
+  }, 250);
+}
+// Initialize
+setTimeout(() => stepBody.classList.add('visible'), 300);
 
 // Solutions hover list
 const solItems = document.querySelectorAll('.sol-item');
