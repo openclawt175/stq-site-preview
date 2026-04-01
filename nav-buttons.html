@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nav Demo — Two Buttons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #1B2E4B;
+    --cream: #F0EFEB;
+    --cream-dark: #E4E3DF;
+    --font-heading: 'Chakra Petch', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  body { background: var(--cream); font-family: var(--font-body); color: var(--navy); }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 72px;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(27,46,75,.1);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .nav-logo svg { display: block; }
+
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--navy); text-decoration: none;
+    opacity: .7; transition: opacity .2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  /* Secondary — lighter border */
+  .cta-secondary {
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--navy); text-decoration: none;
+    border: 1px solid rgba(27,46,75,.25);
+    padding: 9px 20px;
+    transition: border-color .25s, background .25s, color .25s;
+  }
+  .cta-secondary:hover {
+    border-color: var(--navy);
+    background: rgba(27,46,75,.04);
+  }
+
+  /* Primary — heavier border */
+  .cta-primary {
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--navy); text-decoration: none;
+    border: 1.5px solid var(--navy);
+    padding: 10px 22px;
+    transition: background .25s, color .25s;
+  }
+  .cta-primary:hover { background: var(--navy); color: var(--cream); }
+
+  .page { padding-top: 72px; }
+  .hero {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 60vh; flex-direction: column; gap: 16px;
+    text-align: center; padding: 80px 48px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading); font-size: 42px; font-weight: 700;
+    letter-spacing: -0.5px; color: var(--navy);
+  }
+  .hero p { font-size: 16px; line-height: 1.7; max-width: 520px; opacity: .55; }
+  .section { padding: 80px 48px; max-width: 800px; margin: 0 auto; }
+  .section h2 {
+    font-family: var(--font-heading); font-size: 24px; font-weight: 600; margin-bottom: 16px;
+  }
+  .section p { font-size: 15px; line-height: 1.8; opacity: .5; }
+  .label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 1.4px; text-transform: uppercase;
+    background: rgba(27,46,75,.06);
+    padding: 6px 14px; border-radius: 3px; margin-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg width="80" height="44" viewBox="0 0 80 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="22" font-family="'Chakra Petch', sans-serif" font-size="22" font-weight="700" fill="#1B2E4B" letter-spacing="3">STQ</text>
+      <text x="0" y="38" font-family="'DM Sans', sans-serif" font-size="9" font-weight="400" fill="#1B2E4B" opacity="0.5" letter-spacing="1.2">Capital Partners</text>
+    </svg>
+  </a>
+  <div class="nav-links">
+    <a href="#">Solutions</a>
+    <a href="#">About</a>
+    <a href="#">Insights</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="nav-cta">
+    <a href="#" class="cta-secondary">Client Login</a>
+    <a href="#" class="cta-primary">Schedule a Meeting</a>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="hero">
+    <span class="label">Demo 2 — Two Bordered Buttons</span>
+    <h1>Wealth, Reimagined.</h1>
+    <p>Placeholder content to demonstrate the fixed navigation bar above. Scroll down to see the nav remain in position.</p>
+  </div>
+  <div class="section">
+    <h2>About This Demo</h2>
+    <p>"Client Login" appears as a bordered button with a lighter, thinner border (1px, 25% opacity) while "Schedule a Meeting" uses a heavier 1.5px solid border. Both share the Chakra Petch font but the weight hierarchy makes the primary action clear.</p>
+  </div>
+  <div class="section">
+    <h2>Placeholder Section</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  </div>
+  <div class="section">
+    <h2>Another Section</h2>
+    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+  </div>
+</main>
+
+</body>
+</html>
