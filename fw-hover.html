@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Hover Match</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #1B2E4B99;
+    margin-bottom: 48px;
+    font-weight: 500;
+  }
+
+  .framework {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 24px rgba(27,46,75,0.04);
+    opacity: 0;
+    animation: fadeIn 0.6s ease 0.15s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .left-panel {
+    background: #E6E4DE;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-item:hover,
+  .nav-item.active {
+    background: #F0EFEB;
+    border-left-color: #1B2E4B;
+  }
+
+  .nav-item.active {
+    background: #F0EFEB;
+  }
+
+  .nav-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    color: #1B2E4B;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+    min-width: 56px;
+  }
+
+  .nav-item:hover .nav-letter,
+  .nav-item.active .nav-letter {
+    opacity: 0.45;
+  }
+
+  .nav-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1B2E4B;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-item:hover .nav-title,
+  .nav-item.active .nav-title {
+    opacity: 1;
+  }
+
+  .right-panel {
+    background: #FFFFFF;
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .detail {
+    display: none;
+    opacity: 0;
+    animation: slideIn 0.35s ease forwards;
+  }
+
+  .detail.active {
+    display: block;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .detail-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #1B2E4B;
+    opacity: 0.08;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .detail-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1B2E4B;
+    margin-bottom: 20px;
+  }
+
+  .detail-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #1B2E4Bcc;
+    max-width: 440px;
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: 64px 20px; }
+    .framework {
+      grid-template-columns: 1fr;
+    }
+    .left-panel { padding: 32px 20px; }
+    .right-panel { padding: 40px 24px; }
+    .nav-letter { font-size: 36px; min-width: 44px; }
+  }
+</style>
+</head>
+<body>
+<section class="section">
+  <p class="label">Our Framework</p>
+  <div class="framework">
+    <div class="left-panel">
+      <div class="nav-item active" data-target="strategic" onmouseenter="activate('strategic')" onclick="activate('strategic')">
+        <span class="nav-letter">S</span>
+        <span class="nav-title">Strategic</span>
+      </div>
+      <div class="nav-item" data-target="tactical" onmouseenter="activate('tactical')" onclick="activate('tactical')">
+        <span class="nav-letter">T</span>
+        <span class="nav-title">Tactical</span>
+      </div>
+      <div class="nav-item" data-target="quantitative" onmouseenter="activate('quantitative')" onclick="activate('quantitative')">
+        <span class="nav-letter">Q</span>
+        <span class="nav-title">Quantitative</span>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="detail active" id="strategic">
+        <div class="detail-letter">S</div>
+        <h3 class="detail-title">Strategic</h3>
+        <p class="detail-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+      </div>
+      <div class="detail" id="tactical">
+        <div class="detail-letter">T</div>
+        <h3 class="detail-title">Tactical</h3>
+        <p class="detail-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+      </div>
+      <div class="detail" id="quantitative">
+        <div class="detail-letter">Q</div>
+        <h3 class="detail-title">Quantitative</h3>
+        <p class="detail-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function activate(id) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.detail').forEach(el => el.classList.remove('active'));
+  document.querySelector(`[data-target="${id}"]`).classList.add('active');
+  const detail = document.getElementById(id);
+  detail.classList.add('active');
+  // Re-trigger animation
+  detail.style.animation = 'none';
+  detail.offsetHeight;
+  detail.style.animation = '';
+}
+</script>
+</body>
+</html>
