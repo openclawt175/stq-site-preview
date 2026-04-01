@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Accordion</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F0EFEB; color: #1B2E4B; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+  .framework { max-width: 680px; width: 100%; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #1B2E4B99; margin-bottom: 32px; font-weight: 500; }
+
+  .accordion-item { border-bottom: 1px solid #1B2E4B15; }
+  .accordion-item:first-child { border-top: 1px solid #1B2E4B15; }
+
+  .accordion-header {
+    display: flex; align-items: center; gap: 20px;
+    padding: 24px 8px; cursor: pointer; user-select: none;
+    transition: background 0.2s ease;
+  }
+  .accordion-header:hover { background: #E6E4DE80; }
+
+  .accordion-letter {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 1.75rem; color: #1B2E4B; width: 40px; text-align: center;
+    flex-shrink: 0; transition: color 0.3s ease;
+  }
+  .accordion-item.active .accordion-letter { color: #1B2E4B; }
+
+  .accordion-title {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 600;
+    font-size: 1.1rem; color: #1B2E4B; flex: 1;
+  }
+
+  .accordion-icon {
+    width: 24px; height: 24px; flex-shrink: 0; position: relative;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-item.active .accordion-icon { transform: rotate(180deg); }
+  .accordion-icon::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 6px solid #1B2E4B99;
+  }
+
+  .accordion-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+  }
+  .accordion-item.active .accordion-body { max-height: 200px; }
+
+  .accordion-content {
+    padding: 0 8px 28px 68px;
+    font-size: 0.95rem; line-height: 1.7; color: #1B2E4B99;
+    opacity: 0; transform: translateY(-8px);
+    transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+  }
+  .accordion-item.active .accordion-content {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .dot { margin: 0 4px; opacity: 0.4; }
+
+  @media (max-width: 600px) {
+    .accordion-content { padding-left: 8px; }
+    .accordion-letter { font-size: 1.4rem; width: 32px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework">
+  <p class="label">Our Framework</p>
+
+  <div class="accordion-item active" data-index="0">
+    <div class="accordion-header" onclick="toggle(0)">
+      <span class="accordion-letter">S</span>
+      <span class="accordion-title">Strategic</span>
+      <span class="accordion-icon"></span>
+    </div>
+    <div class="accordion-body">
+      <p class="accordion-content">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+  </div>
+
+  <div class="accordion-item" data-index="1">
+    <div class="accordion-header" onclick="toggle(1)">
+      <span class="accordion-letter">T</span>
+      <span class="accordion-title">Tactical</span>
+      <span class="accordion-icon"></span>
+    </div>
+    <div class="accordion-body">
+      <p class="accordion-content">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+  </div>
+
+  <div class="accordion-item" data-index="2">
+    <div class="accordion-header" onclick="toggle(2)">
+      <span class="accordion-letter">Q</span>
+      <span class="accordion-title">Quantitative</span>
+      <span class="accordion-icon"></span>
+    </div>
+    <div class="accordion-body">
+      <p class="accordion-content">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggle(index) {
+  document.querySelectorAll('.accordion-item').forEach((item, i) => {
+    if (i === index) {
+      item.classList.toggle('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+}
+</script>
+</body>
+</html>

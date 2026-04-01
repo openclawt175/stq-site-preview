@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Mosaic</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F0EFEB; color: #1B2E4B; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+  .framework { max-width: 880px; width: 100%; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #1B2E4B99; margin-bottom: 36px; font-weight: 500; }
+
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    min-height: 480px;
+  }
+
+  .card {
+    background: #E6E4DE; border-radius: 16px; padding: 40px 36px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+    opacity: 0; animation: mosaicIn 0.6s ease forwards;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px #1B2E4B12;
+  }
+
+  .card--s {
+    grid-row: 1 / 3;
+    animation-delay: 0s;
+  }
+  .card--t { animation-delay: 0.15s; }
+  .card--q { animation-delay: 0.3s; }
+
+  .card-watermark {
+    position: absolute; font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700; line-height: 1; color: #1B2E4B06;
+    pointer-events: none;
+    transition: transform 0.35s ease;
+  }
+  .card:hover .card-watermark { transform: scale(1.04); }
+
+  .card--s .card-watermark { font-size: 320px; right: -30px; bottom: -60px; }
+  .card--t .card-watermark { font-size: 180px; right: -12px; bottom: -30px; }
+  .card--q .card-watermark { font-size: 180px; right: -12px; bottom: -30px; }
+
+  .card-title {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 600;
+    color: #1B2E4B; margin-bottom: 12px; position: relative; z-index: 1;
+  }
+  .card--s .card-title { font-size: 1.6rem; }
+  .card--t .card-title, .card--q .card-title { font-size: 1.2rem; }
+
+  .card-desc {
+    font-size: 0.92rem; line-height: 1.7; color: #1B2E4B90;
+    position: relative; z-index: 1;
+  }
+  .card--s .card-desc { max-width: 340px; }
+
+  .card-tag {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #1B2E4B50; margin-bottom: 8px; position: relative; z-index: 1;
+  }
+
+  @keyframes mosaicIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @media (max-width: 640px) {
+    .mosaic {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      min-height: auto;
+    }
+    .card--s { grid-row: auto; }
+    .card { padding: 32px 24px; }
+    .card--s .card-watermark { font-size: 200px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework">
+  <p class="label">Our Framework</p>
+
+  <div class="mosaic">
+    <div class="card card--s">
+      <span class="card-watermark">S</span>
+      <p class="card-tag">S — Strategic</p>
+      <h2 class="card-title">Strategic</h2>
+      <p class="card-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+
+    <div class="card card--t">
+      <span class="card-watermark">T</span>
+      <p class="card-tag">T — Tactical</p>
+      <h3 class="card-title">Tactical</h3>
+      <p class="card-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+
+    <div class="card card--q">
+      <span class="card-watermark">Q</span>
+      <p class="card-tag">Q — Quantitative</p>
+      <h3 class="card-title">Quantitative</h3>
+      <p class="card-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

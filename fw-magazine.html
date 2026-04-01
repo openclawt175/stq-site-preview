@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Magazine</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F0EFEB; color: #1B2E4B; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 60px 24px; }
+  .framework { max-width: 900px; width: 100%; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #1B2E4B99; margin-bottom: 40px; font-weight: 500; }
+
+  /* Hero — Strategic */
+  .hero {
+    background: #E6E4DE; border-radius: 16px; padding: 56px 48px;
+    margin-bottom: 24px; position: relative; overflow: hidden;
+    opacity: 0; animation: fadeUp 0.6s ease forwards;
+  }
+  .hero::before {
+    content: 'S'; position: absolute; right: -20px; top: -40px;
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 280px; color: #1B2E4B06; line-height: 1;
+    pointer-events: none;
+  }
+  .hero-letter {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #1B2E4B70; margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 2.4rem; line-height: 1.15; color: #1B2E4B;
+    margin-bottom: 20px; max-width: 600px;
+  }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75; color: #1B2E4B99;
+    max-width: 560px;
+  }
+
+  /* Grid — T and Q */
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .grid-card {
+    background: #E6E4DE; border-radius: 14px; padding: 40px 36px;
+    position: relative; overflow: hidden;
+    opacity: 0; animation: fadeUp 0.6s ease forwards;
+  }
+  .grid-card:nth-child(1) { animation-delay: 0.15s; }
+  .grid-card:nth-child(2) { animation-delay: 0.3s; }
+
+  .grid-card::before {
+    position: absolute; right: -8px; top: -16px;
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 160px; color: #1B2E4B06; line-height: 1;
+    pointer-events: none;
+  }
+  .grid-card:nth-child(1)::before { content: 'T'; }
+  .grid-card:nth-child(2)::before { content: 'Q'; }
+
+  .grid-letter {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 700;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #1B2E4B70; margin-bottom: 12px;
+  }
+  .grid-title {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 600;
+    font-size: 1.35rem; color: #1B2E4B; margin-bottom: 14px;
+  }
+  .grid-desc {
+    font-size: 0.92rem; line-height: 1.7; color: #1B2E4B99;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 28px; }
+    .hero-title { font-size: 1.8rem; }
+    .grid-card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework">
+  <p class="label">Our Framework</p>
+
+  <div class="hero">
+    <p class="hero-letter">S — Strategic</p>
+    <h2 class="hero-title">Strategic</h2>
+    <p class="hero-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+  </div>
+
+  <div class="grid">
+    <div class="grid-card">
+      <p class="grid-letter">T — Tactical</p>
+      <h3 class="grid-title">Tactical</h3>
+      <p class="grid-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+    <div class="grid-card">
+      <p class="grid-letter">Q — Quantitative</p>
+      <h3 class="grid-title">Quantitative</h3>
+      <p class="grid-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

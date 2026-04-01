@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Minimal</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #F0EFEB; color: #1B2E4B; font-family: 'DM Sans', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 24px; }
+  .framework { max-width: 540px; width: 100%; text-align: center; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: #1B2E4B99; margin-bottom: 64px; font-weight: 500; }
+
+  .pillar {
+    opacity: 0; animation: fadeIn 0.7s ease forwards;
+  }
+  .pillar:nth-child(2) { animation-delay: 0.1s; }
+  .pillar:nth-child(3) { animation-delay: 0.2s; }
+  .pillar:nth-child(4) { animation-delay: 0.3s; }
+
+  .pillar + .pillar { margin-top: 56px; }
+
+  .rule {
+    width: 48px; height: 1px; background: #1B2E4B30;
+    margin: 0 auto 40px;
+  }
+
+  .pillar-letter {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 300;
+    font-size: 3.5rem; color: #1B2E4B25; line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .pillar-title {
+    font-family: 'Chakra Petch', sans-serif; font-weight: 600;
+    font-size: 1.15rem; color: #1B2E4B; margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .pillar-desc {
+    font-size: 0.92rem; line-height: 1.75; color: #1B2E4B80;
+    max-width: 440px; margin: 0 auto;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<section class="framework">
+  <p class="label">Our Framework</p>
+
+  <div class="pillar">
+    <div class="rule"></div>
+    <p class="pillar-letter">S</p>
+    <h2 class="pillar-title">Strategic</h2>
+    <p class="pillar-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+  </div>
+
+  <div class="pillar">
+    <div class="rule"></div>
+    <p class="pillar-letter">T</p>
+    <h2 class="pillar-title">Tactical</h2>
+    <p class="pillar-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+  </div>
+
+  <div class="pillar">
+    <div class="rule"></div>
+    <p class="pillar-letter">Q</p>
+    <h2 class="pillar-title">Quantitative</h2>
+    <p class="pillar-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+  </div>
+</section>
+</body>
+</html>
