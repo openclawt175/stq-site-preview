@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Giant Letters + Expandable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1B2E4B;
+    --cream: #F0EFEB;
+    --cream-dark: #E6E4DE;
+    --font-heading: 'Chakra Petch', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--navy);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .framework {
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .framework-label {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(27, 46, 75, 0.4);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+  }
+
+  .column {
+    position: relative;
+    cursor: pointer;
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 12px;
+    transition: background 0.3s ease;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .column:hover {
+    background: rgba(27, 46, 75, 0.03);
+  }
+
+  .column.active {
+    background: rgba(27, 46, 75, 0.04);
+  }
+
+  /* Giant letter */
+  .giant-letter {
+    font-family: var(--font-heading);
+    font-size: 170px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+    opacity: 0.06;
+    transition: opacity 0.4s ease;
+    text-align: center;
+    pointer-events: none;
+    margin-bottom: -0.15em;
+  }
+
+  .column.active .giant-letter {
+    opacity: 0.12;
+  }
+
+  /* Title */
+  .column-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  /* Dot separator */
+  .column-title .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background: var(--navy);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 0.15em;
+    opacity: 0.3;
+  }
+
+  /* Description — collapsible */
+  .column-desc-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .column.active .column-desc-wrapper {
+    grid-template-rows: 1fr;
+  }
+
+  .column-desc-inner {
+    overflow: hidden;
+  }
+
+  .column-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(27, 46, 75, 0.7);
+    text-align: center;
+    padding-top: 1.25rem;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Subtle expand indicator */
+  .expand-indicator {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: rgba(27, 46, 75, 0.15);
+    border-radius: 1px;
+    margin: 1rem auto 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+  }
+
+  .column.active .expand-indicator {
+    width: 30px;
+    opacity: 0.3;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    body { padding: 2rem 1rem; }
+
+    .columns {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .column {
+      padding: 1.5rem 1.5rem 1.25rem;
+      border-radius: 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .column:first-child { border-radius: 12px 12px 0 0; }
+    .column:last-child { border-radius: 0 0 12px 12px; border-bottom: none; }
+
+    .giant-letter {
+      font-size: 120px;
+      margin-bottom: -0.1em;
+    }
+
+    .column-desc {
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="framework">
+  <p class="framework-label">Our Framework</p>
+
+  <div class="columns">
+    <div class="column active" data-col="s">
+      <div class="giant-letter">S</div>
+      <h3 class="column-title">Strategic</h3>
+      <div class="column-desc-wrapper">
+        <div class="column-desc-inner">
+          <p class="column-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+        </div>
+      </div>
+      <span class="expand-indicator"></span>
+    </div>
+
+    <div class="column" data-col="t">
+      <div class="giant-letter">T</div>
+      <h3 class="column-title">Tactical</h3>
+      <div class="column-desc-wrapper">
+        <div class="column-desc-inner">
+          <p class="column-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+        </div>
+      </div>
+      <span class="expand-indicator"></span>
+    </div>
+
+    <div class="column" data-col="q">
+      <div class="giant-letter">Q</div>
+      <h3 class="column-title">Quantitative</h3>
+      <div class="column-desc-wrapper">
+        <div class="column-desc-inner">
+          <p class="column-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+        </div>
+      </div>
+      <span class="expand-indicator"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.column').forEach(col => {
+    col.addEventListener('click', () => {
+      const wasActive = col.classList.contains('active');
+
+      // Close all
+      document.querySelectorAll('.column').forEach(c => c.classList.remove('active'));
+
+      // Toggle clicked (close if was open, open if was closed)
+      if (!wasActive) {
+        col.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
