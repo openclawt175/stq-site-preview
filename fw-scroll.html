@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Horizontal Scroll</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .framework-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #F0EFEB;
+  }
+
+  .section-label {
+    padding: 48px 64px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: #1B2E4B;
+    opacity: 0.45;
+  }
+
+  .panels-viewport {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .panels-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .panel {
+    min-width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 64px;
+    gap: 0;
+  }
+
+  .panel-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: clamp(180px, 22vw, 320px);
+    line-height: 0.85;
+    color: #1B2E4B;
+    opacity: 0.07;
+    flex-shrink: 0;
+    width: 40%;
+    text-align: center;
+    user-select: none;
+    position: relative;
+  }
+
+  .panel-letter .accent-letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(60px, 7vw, 100px);
+    opacity: 1;
+    color: #1B2E4B;
+  }
+
+  .panel-content {
+    max-width: 560px;
+    padding-left: 20px;
+  }
+
+  .panel-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1B2E4B;
+    opacity: 0.2;
+    margin-bottom: 20px;
+  }
+
+  .panel-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: clamp(28px, 3.5vw, 44px);
+    color: #1B2E4B;
+    margin-bottom: 20px;
+    line-height: 1.15;
+  }
+
+  .panel-description {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.7;
+    color: #1B2E4B;
+    opacity: 0.7;
+  }
+
+  .nav-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 32px 0 48px;
+  }
+
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1B2E4B;
+    opacity: 0.15;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: none;
+    padding: 0;
+  }
+
+  .nav-dot.active {
+    opacity: 0.8;
+    width: 32px;
+    border-radius: 5px;
+  }
+
+  .panel-content {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+  }
+
+  .panel.active .panel-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .panel-letter {
+    transform: scale(0.9);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .panel.active .panel-letter {
+    transform: scale(1);
+  }
+
+  /* Swipe hint */
+  .swipe-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 64px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.25;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.4s;
+  }
+
+  .swipe-hint svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+  }
+
+  .swipe-hint.hidden { opacity: 0; }
+
+  @media (max-width: 768px) {
+    .panel {
+      flex-direction: column;
+      padding: 40px 32px;
+      justify-content: center;
+      gap: 0;
+    }
+    .panel-letter {
+      width: 100%;
+      text-align: left;
+      font-size: 140px !important;
+    }
+    .panel-letter .accent-letter { font-size: 48px !important; }
+    .panel-content { padding-left: 0; }
+    .section-label { padding: 32px 32px 0; }
+  }
+</style>
+</head>
+<body>
+<section class="framework-section">
+  <div class="section-label">Our Framework</div>
+
+  <div class="panels-viewport">
+    <div class="panels-track" id="track">
+      <div class="panel active" data-index="0">
+        <div class="panel-letter">S<span class="accent-letter">S.</span></div>
+        <div class="panel-content">
+          <div class="panel-dot"></div>
+          <h2 class="panel-title">Strategic</h2>
+          <p class="panel-description">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+        </div>
+      </div>
+      <div class="panel" data-index="1">
+        <div class="panel-letter">T<span class="accent-letter">T.</span></div>
+        <div class="panel-content">
+          <div class="panel-dot"></div>
+          <h2 class="panel-title">Tactical</h2>
+          <p class="panel-description">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+        </div>
+      </div>
+      <div class="panel" data-index="2">
+        <div class="panel-letter">Q<span class="accent-letter">Q.</span></div>
+        <div class="panel-content">
+          <div class="panel-dot"></div>
+          <h2 class="panel-title">Quantitative</h2>
+          <p class="panel-description">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="swipe-hint" id="swipeHint">
+      Swipe
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </div>
+
+  <div class="nav-dots" id="navDots">
+    <button class="nav-dot active" data-index="0" aria-label="Strategic"></button>
+    <button class="nav-dot" data-index="1" aria-label="Tactical"></button>
+    <button class="nav-dot" data-index="2" aria-label="Quantitative"></button>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('track');
+  const dots = document.querySelectorAll('.nav-dot');
+  const panels = document.querySelectorAll('.panel');
+  const hint = document.getElementById('swipeHint');
+  let current = 0;
+
+  function goTo(index) {
+    if (index < 0 || index > 2) return;
+    current = index;
+    track.style.transform = `translateX(-${current * 100}vw)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    panels.forEach((p, i) => p.classList.toggle('active', i === current));
+    if (current > 0) hint.classList.add('hidden');
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  });
+
+  // Touch/swipe
+  let startX = 0;
+  const vp = document.querySelector('.panels-viewport');
+  vp.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  vp.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+  }, { passive: true });
+
+  // Mouse wheel horizontal
+  let wheelTimeout;
+  vp.addEventListener('wheel', e => {
+    e.preventDefault();
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        goTo(current + (e.deltaX > 0 ? 1 : -1));
+      } else {
+        goTo(current + (e.deltaY > 0 ? 1 : -1));
+      }
+    }, 50);
+  }, { passive: false });
+</script>
+</body>
+</html>

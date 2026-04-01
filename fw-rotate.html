@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Rotating</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .framework-section {
+    width: 100%;
+    max-width: 900px;
+    padding: 80px 40px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: #1B2E4B;
+    opacity: 0.45;
+  }
+
+  .rotator-container {
+    position: relative;
+    background: #E6E4DE;
+    border-radius: 16px;
+    padding: 56px 64px;
+    min-height: 260px;
+    overflow: hidden;
+  }
+
+  .rotator-bg-letter {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 300px;
+    line-height: 1;
+    color: #1B2E4B;
+    opacity: 0.03;
+    user-select: none;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  .slide.exiting {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  .slide-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .slide-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1;
+    color: #1B2E4B;
+    opacity: 0.15;
+  }
+
+  .slide-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #1B2E4B;
+    line-height: 1.2;
+  }
+
+  .slide-divider {
+    width: 40px;
+    height: 2px;
+    background: #1B2E4B;
+    opacity: 0.15;
+    margin-bottom: 20px;
+  }
+
+  .slide-description {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #1B2E4B;
+    opacity: 0.65;
+    max-width: 560px;
+  }
+
+  /* Navigation */
+  .rotator-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+
+  .nav-arrows {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(27, 46, 75, 0.15);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1B2E4B;
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
+
+  .nav-arrow:hover {
+    opacity: 1;
+    border-color: rgba(27, 46, 75, 0.3);
+    background: rgba(27, 46, 75, 0.04);
+  }
+
+  .nav-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-dots-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav-pip {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1B2E4B;
+    opacity: 0.12;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: all 0.4s ease;
+  }
+
+  .nav-pip.active {
+    opacity: 0.6;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  /* Progress bar */
+  .progress-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(27, 46, 75, 0.05);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: rgba(27, 46, 75, 0.15);
+    width: 0;
+    transition: width 0.1s linear;
+  }
+
+  .progress-fill.reset {
+    transition: none;
+  }
+
+  @media (max-width: 768px) {
+    .framework-section { padding: 48px 20px; }
+    .rotator-container { padding: 40px 28px; min-height: 220px; }
+    .slide { padding: 40px 28px; }
+    .slide-title { font-size: 24px; }
+    .slide-description { font-size: 15px; }
+    .rotator-bg-letter { font-size: 180px; right: -10px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework-section">
+  <div class="section-label">Our Framework</div>
+
+  <div class="rotator-container" id="rotator">
+    <div class="slide active" data-index="0">
+      <div class="slide-top">
+        <span class="slide-letter">S.</span>
+        <h2 class="slide-title">Strategic</h2>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-description">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+
+    <div class="slide" data-index="1">
+      <div class="slide-top">
+        <span class="slide-letter">T.</span>
+        <h2 class="slide-title">Tactical</h2>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-description">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+
+    <div class="slide" data-index="2">
+      <div class="slide-top">
+        <span class="slide-letter">Q.</span>
+        <h2 class="slide-title">Quantitative</h2>
+      </div>
+      <div class="slide-divider"></div>
+      <p class="slide-description">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+
+    <div class="rotator-bg-letter" id="bgLetter">S</div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="rotator-nav">
+    <div class="nav-arrows">
+      <button class="nav-arrow" id="prevBtn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="nav-arrow" id="nextBtn" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="nav-dots-row" id="pips">
+      <button class="nav-pip active" data-index="0"></button>
+      <button class="nav-pip" data-index="1"></button>
+      <button class="nav-pip" data-index="2"></button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const pips = document.querySelectorAll('.nav-pip');
+  const bgLetter = document.getElementById('bgLetter');
+  const progressFill = document.getElementById('progressFill');
+  const letters = ['S', 'T', 'Q'];
+  let current = 0;
+  let autoTimer = null;
+  let progressInterval = null;
+  const DURATION = 5000;
+  const TICK = 50;
+
+  function goTo(index, direction) {
+    if (index === current) return;
+    const prev = current;
+    current = ((index % 3) + 3) % 3;
+
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add('exiting');
+    setTimeout(() => slides[prev].classList.remove('exiting'), 500);
+
+    slides[current].classList.add('active');
+
+    pips.forEach((p, i) => p.classList.toggle('active', i === current));
+    bgLetter.textContent = letters[current];
+
+    resetProgress();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.getElementById('nextBtn').addEventListener('click', () => { next(); restartAuto(); });
+  document.getElementById('prevBtn').addEventListener('click', () => { prev(); restartAuto(); });
+  pips.forEach(p => p.addEventListener('click', () => { goTo(+p.dataset.index); restartAuto(); }));
+
+  function resetProgress() {
+    progressFill.classList.add('reset');
+    progressFill.style.width = '0%';
+    requestAnimationFrame(() => {
+      progressFill.classList.remove('reset');
+    });
+    clearInterval(progressInterval);
+    let elapsed = 0;
+    progressInterval = setInterval(() => {
+      elapsed += TICK;
+      progressFill.style.width = `${(elapsed / DURATION) * 100}%`;
+      if (elapsed >= DURATION) clearInterval(progressInterval);
+    }, TICK);
+  }
+
+  function restartAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(next, DURATION);
+    resetProgress();
+  }
+
+  // Start
+  restartAuto();
+</script>
+</body>
+</html>

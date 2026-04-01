@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Vertical Blocks</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+  }
+
+  .framework-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 64px 120px;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 80px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: #1B2E4B;
+    opacity: 0.45;
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 64px 0;
+    border-top: 1px solid rgba(27, 46, 75, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .block:last-child {
+    border-bottom: 1px solid rgba(27, 46, 75, 0.1);
+  }
+
+  .block-letter-wrap {
+    position: relative;
+    height: 240px;
+    display: flex;
+    align-items: center;
+  }
+
+  .block-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 280px;
+    line-height: 1;
+    color: #1B2E4B;
+    opacity: 0.04;
+    user-select: none;
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .block-number {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: #1B2E4B;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .block-content {
+    padding-left: 40px;
+  }
+
+  .block-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    color: #1B2E4B;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .block-title .letter-accent {
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 0.35;
+    letter-spacing: 2px;
+  }
+
+  .block-subtitle {
+    width: 48px;
+    height: 2px;
+    background: #1B2E4B;
+    opacity: 0.1;
+    margin-bottom: 24px;
+  }
+
+  .block-description {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #1B2E4B;
+    opacity: 0.65;
+    max-width: 480px;
+  }
+
+  @media (max-width: 768px) {
+    .framework-section { padding: 60px 28px 80px; }
+    .block {
+      grid-template-columns: 1fr;
+      padding: 48px 0;
+    }
+    .block-letter-wrap { height: 120px; }
+    .block-letter {
+      font-size: 160px;
+      left: -10px;
+    }
+    .block-content { padding-left: 0; padding-top: 0; }
+    .block-title { font-size: 28px; }
+    .block-description { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework-section">
+  <div class="section-label">Our Framework</div>
+
+  <div class="block">
+    <div class="block-letter-wrap">
+      <span class="block-number">01</span>
+      <span class="block-letter">S</span>
+    </div>
+    <div class="block-content">
+      <h2 class="block-title">Strategic <span class="letter-accent">S.</span></h2>
+      <div class="block-subtitle"></div>
+      <p class="block-description">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-letter-wrap">
+      <span class="block-number">02</span>
+      <span class="block-letter">T</span>
+    </div>
+    <div class="block-content">
+      <h2 class="block-title">Tactical <span class="letter-accent">T.</span></h2>
+      <div class="block-subtitle"></div>
+      <p class="block-description">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-letter-wrap">
+      <span class="block-number">03</span>
+      <span class="block-letter">Q</span>
+    </div>
+    <div class="block-content">
+      <h2 class="block-title">Quantitative <span class="letter-accent">Q.</span></h2>
+      <div class="block-subtitle"></div>
+      <p class="block-description">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

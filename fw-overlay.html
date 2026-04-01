@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Overlay Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .framework-section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 80px 40px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.45;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 60px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: #1B2E4B;
+    opacity: 0.45;
+  }
+
+  .cards-stage {
+    position: relative;
+    height: 480px;
+    max-width: 800px;
+    margin: 0 auto;
+    perspective: 1200px;
+  }
+
+  .overlay-card {
+    position: absolute;
+    width: 100%;
+    max-width: 640px;
+    background: #E6E4DE;
+    border-radius: 16px;
+    padding: 48px 52px;
+    cursor: pointer;
+    transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 24px rgba(27, 46, 75, 0.06);
+    border: 1px solid rgba(27, 46, 75, 0.06);
+    user-select: none;
+  }
+
+  .overlay-card:hover:not(.active) {
+    box-shadow: 0 8px 32px rgba(27, 46, 75, 0.1);
+  }
+
+  /* Stacked positions — back to front */
+  .overlay-card[data-pos="back"] {
+    top: 0;
+    left: 0;
+    transform: scale(0.92) translateY(0);
+    z-index: 1;
+    opacity: 0.5;
+    filter: blur(1px);
+  }
+
+  .overlay-card[data-pos="middle"] {
+    top: 30px;
+    left: 40px;
+    transform: scale(0.96) translateY(0);
+    z-index: 2;
+    opacity: 0.75;
+  }
+
+  .overlay-card[data-pos="front"] {
+    top: 60px;
+    left: 80px;
+    transform: scale(1) translateY(0);
+    z-index: 3;
+    opacity: 1;
+    background: #F0EFEB;
+    border: 1px solid rgba(27, 46, 75, 0.1);
+    box-shadow: 0 12px 48px rgba(27, 46, 75, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .card-letter {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1;
+    color: #1B2E4B;
+    opacity: 0.12;
+    transition: opacity 0.4s;
+  }
+
+  .overlay-card[data-pos="front"] .card-letter {
+    opacity: 0.15;
+  }
+
+  .card-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: #1B2E4B;
+    line-height: 1.2;
+  }
+
+  .card-divider {
+    width: 40px;
+    height: 2px;
+    background: #1B2E4B;
+    opacity: 0.12;
+    margin-bottom: 20px;
+    transition: width 0.4s ease, opacity 0.4s ease;
+  }
+
+  .overlay-card[data-pos="front"] .card-divider {
+    width: 56px;
+    opacity: 0.2;
+  }
+
+  .card-description {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #1B2E4B;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease 0.15s, max-height 0.5s ease;
+  }
+
+  .overlay-card[data-pos="front"] .card-description {
+    opacity: 0.7;
+    max-height: 200px;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1B2E4B;
+    opacity: 0.2;
+    letter-spacing: 1px;
+  }
+
+  /* Click instruction */
+  .click-hint {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 13px;
+    color: #1B2E4B;
+    opacity: 0.3;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .cards-stage { height: 420px; }
+    .overlay-card {
+      max-width: calc(100vw - 120px);
+      padding: 32px 28px;
+    }
+    .overlay-card[data-pos="back"] { left: 0; top: 0; }
+    .overlay-card[data-pos="middle"] { left: 20px; top: 20px; }
+    .overlay-card[data-pos="front"] { left: 40px; top: 40px; }
+    .card-letter { font-size: 48px; }
+    .card-title { font-size: 22px; }
+    .card-description { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<section class="framework-section">
+  <div class="section-label">Our Framework</div>
+
+  <div class="cards-stage" id="stage">
+    <div class="overlay-card" data-index="0" data-pos="front">
+      <span class="card-number">01</span>
+      <div class="card-header">
+        <span class="card-letter">S.</span>
+        <h2 class="card-title">Strategic</h2>
+      </div>
+      <div class="card-divider"></div>
+      <p class="card-description">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+
+    <div class="overlay-card" data-index="1" data-pos="middle">
+      <span class="card-number">02</span>
+      <div class="card-header">
+        <span class="card-letter">T.</span>
+        <h2 class="card-title">Tactical</h2>
+      </div>
+      <div class="card-divider"></div>
+      <p class="card-description">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+
+    <div class="overlay-card" data-index="2" data-pos="back">
+      <span class="card-number">03</span>
+      <div class="card-header">
+        <span class="card-letter">Q.</span>
+        <h2 class="card-title">Quantitative</h2>
+      </div>
+      <div class="card-divider"></div>
+      <p class="card-description">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+
+  <p class="click-hint">Click a card to bring it forward</p>
+</section>
+
+<script>
+  const cards = document.querySelectorAll('.overlay-card');
+  const positions = ['front', 'middle', 'back'];
+  let order = [0, 1, 2]; // which card index is front, middle, back
+
+  function setPositions() {
+    order.forEach((cardIdx, posIdx) => {
+      cards[cardIdx].setAttribute('data-pos', positions[posIdx]);
+    });
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = +card.dataset.index;
+      if (order[0] === idx) return; // already front
+
+      // Move clicked card to front, shift others back
+      const currentPos = order.indexOf(idx);
+      order.splice(currentPos, 1);
+      order.unshift(idx);
+      setPositions();
+    });
+  });
+</script>
+</body>
+</html>
