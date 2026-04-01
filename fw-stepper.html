@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Stepper</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #F0EFEB; font-family: 'DM Sans', sans-serif; color: #1B2E4B; min-height: 100vh; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 80px 24px; }
+.header { text-align: center; margin-bottom: 64px; }
+.label { font-size: 12px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: #1B2E4B; opacity: 0.4; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 10px; }
+.label::before { content: ''; width: 20px; height: 1.5px; background: #1B2E4B; opacity: 0.5; }
+.header h1 { font-family: 'Chakra Petch', sans-serif; font-size: 42px; font-weight: 700; color: #1B2E4B; letter-spacing: -0.5px; }
+
+/* Stepper */
+.stepper { display: flex; align-items: center; justify-content: center; margin-bottom: 64px; padding: 0 40px; }
+.step { display: flex; flex-direction: column; align-items: center; cursor: pointer; position: relative; z-index: 1; }
+.step-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(27,46,75,0.2); background: transparent; display: flex; align-items: center; justify-content: center; font-family: 'Chakra Petch', sans-serif; font-size: 20px; font-weight: 700; color: rgba(27,46,75,0.3); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+.step.active .step-circle { background: #1B2E4B; border-color: #1B2E4B; color: #F0EFEB; transform: scale(1.08); box-shadow: 0 4px 20px rgba(27,46,75,0.2); }
+.step.completed .step-circle { background: rgba(27,46,75,0.08); border-color: rgba(27,46,75,0.25); color: #1B2E4B; }
+.step-label { font-family: 'Chakra Petch', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #1B2E4B; opacity: 0.25; margin-top: 12px; transition: opacity 0.3s ease; }
+.step.active .step-label { opacity: 0.7; }
+.step.completed .step-label { opacity: 0.4; }
+.step-connector { flex: 1; height: 2px; background: rgba(27,46,75,0.1); position: relative; margin: 0 -4px; margin-bottom: 28px; }
+.step-connector .fill { position: absolute; inset: 0; background: rgba(27,46,75,0.25); transform-origin: left; transform: scaleX(0); transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.step-connector.filled .fill { transform: scaleX(1); }
+
+/* Content area */
+.content-area { background: #E6E4DE; border-radius: 20px; padding: 64px 56px; position: relative; overflow: hidden; min-height: 280px; }
+.content-watermark { position: absolute; right: -20px; bottom: -40px; font-family: 'Chakra Petch', sans-serif; font-size: 260px; font-weight: 700; color: #1B2E4B; opacity: 0.03; line-height: 1; pointer-events: none; }
+.content-step-num { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: #1B2E4B; opacity: 0.3; letter-spacing: 1px; margin-bottom: 20px; }
+.content-title { font-family: 'Chakra Petch', sans-serif; font-size: 36px; font-weight: 700; color: #1B2E4B; margin-bottom: 24px; letter-spacing: -0.5px; }
+.content-bar { width: 40px; height: 2.5px; background: #1B2E4B; opacity: 0.15; margin-bottom: 24px; }
+.content-desc { font-size: 17px; line-height: 1.8; color: #1B2E4B; opacity: 0.7; max-width: 560px; }
+
+/* Animations */
+.content-body { opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(0.4,0,0.2,1); }
+.content-body.visible { opacity: 1; transform: translateY(0); }
+
+/* Navigation arrows */
+.nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; }
+.nav-btn { background: none; border: 1.5px solid rgba(27,46,75,0.15); border-radius: 10px; padding: 10px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #1B2E4B; opacity: 0.5; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.5px; }
+.nav-btn:hover { opacity: 0.8; border-color: rgba(27,46,75,0.3); }
+.nav-btn:disabled { opacity: 0.15; cursor: default; }
+.nav-dots { display: flex; gap: 6px; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(27,46,75,0.15); transition: all 0.3s ease; }
+.nav-dot.active { background: rgba(27,46,75,0.4); transform: scale(1.3); }
+
+@media (max-width: 768px) {
+  .container { padding: 48px 20px; }
+  .content-area { padding: 40px 28px; }
+  .content-title { font-size: 28px; }
+  .content-watermark { font-size: 160px; }
+  .header h1 { font-size: 32px; }
+  .step-circle { width: 44px; height: 44px; font-size: 17px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="label">Our Framework</div>
+    <h1>S.T.Q.</h1>
+  </div>
+
+  <div class="stepper">
+    <div class="step active" data-index="0" onclick="goStep(0)">
+      <div class="step-circle">S</div>
+      <div class="step-label">Strategic</div>
+    </div>
+    <div class="step-connector" id="conn0"><div class="fill"></div></div>
+    <div class="step" data-index="1" onclick="goStep(1)">
+      <div class="step-circle">T</div>
+      <div class="step-label">Tactical</div>
+    </div>
+    <div class="step-connector" id="conn1"><div class="fill"></div></div>
+    <div class="step" data-index="2" onclick="goStep(2)">
+      <div class="step-circle">Q</div>
+      <div class="step-label">Quantitative</div>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <div class="content-watermark" id="watermark">S.</div>
+    <div class="content-body visible" id="contentBody">
+      <div class="content-step-num" id="stepNum">Step 1 of 3</div>
+      <div class="content-title" id="contentTitle">Strategic</div>
+      <div class="content-bar"></div>
+      <div class="content-desc" id="contentDesc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" onclick="goStep(current-1)" disabled>← Previous</button>
+    <div class="nav-dots">
+      <div class="nav-dot active" data-i="0"></div>
+      <div class="nav-dot" data-i="1"></div>
+      <div class="nav-dot" data-i="2"></div>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="goStep(current+1)">Next →</button>
+  </div>
+</div>
+
+<script>
+const pillars = [
+  { letter: 'S', title: 'Strategic', desc: 'Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.' },
+  { letter: 'T', title: 'Tactical', desc: 'Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.' },
+  { letter: 'Q', title: 'Quantitative', desc: 'Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.' }
+];
+
+let current = 0;
+const steps = document.querySelectorAll('.step');
+const connectors = [document.getElementById('conn0'), document.getElementById('conn1')];
+const body = document.getElementById('contentBody');
+const watermark = document.getElementById('watermark');
+const dots = document.querySelectorAll('.nav-dot');
+
+function goStep(index) {
+  if (index < 0 || index > 2 || index === current) return;
+  current = index;
+
+  // Update stepper
+  steps.forEach((s, i) => {
+    s.classList.remove('active', 'completed');
+    if (i === index) s.classList.add('active');
+    else if (i < index) s.classList.add('completed');
+  });
+  connectors.forEach((c, i) => {
+    c.classList.toggle('filled', i < index);
+  });
+
+  // Animate content
+  body.classList.remove('visible');
+  setTimeout(() => {
+    const p = pillars[index];
+    document.getElementById('stepNum').textContent = `Step ${index + 1} of 3`;
+    document.getElementById('contentTitle').textContent = p.title;
+    document.getElementById('contentDesc').textContent = p.desc;
+    watermark.textContent = p.letter + '.';
+    body.classList.add('visible');
+  }, 300);
+
+  // Nav buttons
+  document.getElementById('prevBtn').disabled = index === 0;
+  document.getElementById('nextBtn').disabled = index === 2;
+
+  // Dots
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+}
+</script>
+</body>
+</html>

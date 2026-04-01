@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Scroll Reveal</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #F0EFEB; font-family: 'DM Sans', sans-serif; color: #1B2E4B; }
+
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 24px; }
+.label { font-size: 12px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: #1B2E4B; opacity: 0.4; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.label::before { content: ''; width: 20px; height: 1.5px; background: #1B2E4B; opacity: 0.5; }
+.hero h1 { font-family: 'Chakra Petch', sans-serif; font-size: 56px; font-weight: 700; color: #1B2E4B; letter-spacing: -1px; margin-bottom: 16px; }
+.hero p { font-size: 16px; color: #1B2E4B; opacity: 0.4; margin-bottom: 48px; }
+.scroll-cue { width: 24px; height: 40px; border: 2px solid rgba(27,46,75,0.2); border-radius: 12px; position: relative; }
+.scroll-cue::after { content: ''; width: 4px; height: 8px; background: rgba(27,46,75,0.3); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scrollPulse 1.8s ease-in-out infinite; }
+@keyframes scrollPulse { 0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); } 50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); } }
+
+.section { min-height: 100vh; display: flex; align-items: center; padding: 80px 24px; position: relative; overflow: hidden; }
+.section-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 80px; }
+.section:nth-child(odd) .section-inner { flex-direction: row; }
+.section:nth-child(even) .section-inner { flex-direction: row-reverse; }
+.section-letter-wrap { flex-shrink: 0; position: relative; }
+.section-letter { font-family: 'Chakra Petch', sans-serif; font-size: 280px; font-weight: 700; color: #1B2E4B; opacity: 0.06; line-height: 1; }
+.section-number { position: absolute; top: 20px; left: 0; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #1B2E4B; opacity: 0.3; letter-spacing: 1px; }
+.section-content { flex: 1; }
+.section-content h2 { font-family: 'Chakra Petch', sans-serif; font-size: 40px; font-weight: 700; color: #1B2E4B; margin-bottom: 8px; letter-spacing: -0.5px; }
+.section-content .pill { display: inline-block; font-family: 'Chakra Petch', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #1B2E4B; opacity: 0.3; border: 1px solid rgba(27,46,75,0.15); border-radius: 20px; padding: 6px 16px; margin-bottom: 28px; }
+.section-content .bar { width: 48px; height: 2.5px; background: #1B2E4B; opacity: 0.15; margin-bottom: 28px; }
+.section-content p { font-size: 18px; line-height: 1.8; color: #1B2E4B; opacity: 0.7; max-width: 520px; }
+
+/* Reveal animations */
+.reveal { opacity: 0; transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1); }
+.reveal.from-left { transform: translateX(-80px); }
+.reveal.from-right { transform: translateX(80px); }
+.reveal.visible { opacity: 1; transform: translateX(0); }
+
+.section-bg { position: absolute; inset: 0; background: #E6E4DE; opacity: 0; transition: opacity 0.8s ease; z-index: -1; }
+.section.alt .section-bg { opacity: 1; }
+
+@media (max-width: 768px) {
+  .section-inner, .section:nth-child(even) .section-inner { flex-direction: column !important; gap: 24px; text-align: center; }
+  .section-letter { font-size: 160px; }
+  .section-content h2 { font-size: 30px; }
+  .section-content p { font-size: 16px; }
+  .hero h1 { font-size: 38px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="label">Our Framework</div>
+  <h1>S.T.Q.</h1>
+  <p>Three pillars. One unified strategy.</p>
+  <div class="scroll-cue"></div>
+</div>
+
+<section class="section">
+  <div class="section-bg"></div>
+  <div class="section-inner reveal from-left">
+    <div class="section-letter-wrap">
+      <div class="section-number">01</div>
+      <div class="section-letter">S.</div>
+    </div>
+    <div class="section-content">
+      <h2>Strategic</h2>
+      <div class="pill">The Foundation</div>
+      <div class="bar"></div>
+      <p>Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="section-bg"></div>
+  <div class="section-inner reveal from-right">
+    <div class="section-letter-wrap">
+      <div class="section-number">02</div>
+      <div class="section-letter">T.</div>
+    </div>
+    <div class="section-content">
+      <h2>Tactical</h2>
+      <div class="pill">The Execution</div>
+      <div class="bar"></div>
+      <p>Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-bg"></div>
+  <div class="section-inner reveal from-left">
+    <div class="section-letter-wrap">
+      <div class="section-number">03</div>
+      <div class="section-letter">Q.</div>
+    </div>
+    <div class="section-content">
+      <h2>Quantitative</h2>
+      <div class="pill">The Proof</div>
+      <div class="bar"></div>
+      <p>Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

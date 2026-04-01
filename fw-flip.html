@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Flip Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #F0EFEB; font-family: 'DM Sans', sans-serif; color: #1B2E4B; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; }
+.label { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: #1B2E4B; opacity: 0.45; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.label::before { content: ''; width: 20px; height: 1.5px; background: #1B2E4B; opacity: 0.5; }
+h1 { font-family: 'Chakra Petch', sans-serif; font-size: 42px; font-weight: 700; color: #1B2E4B; margin-bottom: 56px; letter-spacing: -0.5px; }
+.cards { display: flex; gap: 32px; max-width: 1100px; width: 100%; justify-content: center; flex-wrap: wrap; }
+.card-container { width: 320px; height: 400px; perspective: 1200px; cursor: pointer; }
+.card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.4, 0.0, 0.2, 1); }
+.card-container:hover .card, .card-container.flipped .card { transform: rotateY(180deg); }
+.card-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; }
+.card-front { background: #E6E4DE; align-items: center; justify-content: center; gap: 12px; border: 1px solid rgba(27,46,75,0.08); }
+.card-front .letter { font-family: 'Chakra Petch', sans-serif; font-size: 120px; font-weight: 700; color: #1B2E4B; line-height: 1; opacity: 0.9; }
+.card-front .dot { font-family: 'Chakra Petch', sans-serif; font-size: 120px; font-weight: 700; color: #1B2E4B; opacity: 0.25; line-height: 1; margin-top: -20px; }
+.card-front .title { font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #1B2E4B; opacity: 0.7; }
+.card-front .hint { font-size: 12px; color: #1B2E4B; opacity: 0.3; margin-top: 24px; letter-spacing: 1px; text-transform: uppercase; }
+.card-back { background: #1B2E4B; transform: rotateY(180deg); padding: 48px 36px; justify-content: center; }
+.card-back .back-letter { font-family: 'Chakra Petch', sans-serif; font-size: 48px; font-weight: 700; color: rgba(240,239,235,0.1); position: absolute; top: 24px; right: 32px; }
+.card-back .back-title { font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 600; color: #F0EFEB; margin-bottom: 20px; }
+.card-back .back-desc { font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; color: rgba(240,239,235,0.8); }
+@media (max-width: 768px) {
+  .cards { flex-direction: column; align-items: center; }
+  h1 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+<div class="label">Our Framework</div>
+<h1>S.T.Q.</h1>
+<div class="cards">
+  <div class="card-container" onclick="this.classList.toggle('flipped')">
+    <div class="card">
+      <div class="card-face card-front">
+        <div class="letter">S</div>
+        <div class="dot">.</div>
+        <div class="title">Strategic</div>
+        <div class="hint">Tap to explore</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="back-letter">S.</div>
+        <div class="back-title">Strategic</div>
+        <div class="back-desc">Tax-aware portfolio construction designed around your full financial picture — investments, real estate, business income, and estate plan working together.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-container" onclick="this.classList.toggle('flipped')">
+    <div class="card">
+      <div class="card-face card-front">
+        <div class="letter">T</div>
+        <div class="dot">.</div>
+        <div class="title">Tactical</div>
+        <div class="hint">Tap to explore</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="back-letter">T.</div>
+        <div class="back-title">Tactical</div>
+        <div class="back-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card-container" onclick="this.classList.toggle('flipped')">
+    <div class="card">
+      <div class="card-face card-front">
+        <div class="letter">Q</div>
+        <div class="dot">.</div>
+        <div class="title">Quantitative</div>
+        <div class="hint">Tap to explore</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="back-letter">Q.</div>
+        <div class="back-title">Quantitative</div>
+        <div class="back-desc">Institutional-grade analytics applied to after-tax outcomes — because a 12% return that keeps 9% beats a 14% return that keeps 7%.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
