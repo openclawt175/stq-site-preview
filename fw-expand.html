@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.T.Q. Framework — Expandable Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1B2E4B;
+    --cream: #F0EFEB;
+    --cream-dark: #E6E4DE;
+    --navy-40: rgba(27, 46, 75, 0.4);
+    --navy-12: rgba(27, 46, 75, 0.12);
+    --navy-06: rgba(27, 46, 75, 0.06);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .framework-section {
+    max-width: 960px;
+    margin: 60px auto;
+    padding: 0 24px;
+  }
+
+  .framework-label {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--navy-40);
+    margin-bottom: 28px;
+  }
+
+  /* ── Horizontal Timeline (desktop) ── */
+  .timeline {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /* Connecting line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    right: 22px;
+    height: 2px;
+    background: var(--navy-12);
+    z-index: 0;
+  }
+
+  .timeline-node {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .node-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 0 0 0;
+  }
+
+  .node-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--navy-12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--navy);
+    flex-shrink: 0;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .timeline-node.active .node-dot {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--cream);
+    box-shadow: 0 2px 12px rgba(27, 46, 75, 0.25);
+  }
+
+  .node-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s ease;
+  }
+
+  .timeline-node:not(.active) .node-title {
+    opacity: 0.55;
+  }
+
+  .timeline-node:hover .node-title {
+    opacity: 1;
+  }
+
+  .timeline-node:hover:not(.active) .node-dot {
+    border-color: var(--navy-40);
+  }
+
+  /* Expandable description */
+  .node-body {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease 0.05s;
+    padding-left: 56px;
+  }
+
+  .timeline-node.active .node-body {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .node-desc {
+    padding: 10px 16px 4px 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--navy);
+    opacity: 0.7;
+    max-width: 280px;
+  }
+
+  /* ── Mobile: vertical ── */
+  @media (max-width: 680px) {
+    .timeline {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline::before {
+      top: 22px;
+      bottom: 22px;
+      left: 21px;
+      right: auto;
+      width: 2px;
+      height: auto;
+    }
+
+    .timeline-node {
+      padding: 0 0 16px 0;
+    }
+
+    .timeline-node:last-child { padding-bottom: 0; }
+
+    .node-body { padding-left: 56px; }
+
+    .node-desc { max-width: 100%; }
+
+    .timeline-node.active .node-body {
+      max-height: 250px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="framework-section">
+  <div class="framework-label">Our Framework</div>
+
+  <div class="timeline" role="list">
+
+    <div class="timeline-node active" role="listitem" data-node="s">
+      <div class="node-head">
+        <div class="node-dot">S</div>
+        <div class="node-title">Strategic</div>
+      </div>
+      <div class="node-body">
+        <p class="node-desc">Tax-aware portfolio construction designed around your full financial picture&nbsp;— investments, real estate, business income, and estate plan working together.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node" role="listitem" data-node="t">
+      <div class="node-head">
+        <div class="node-dot">T</div>
+        <div class="node-title">Tactical</div>
+      </div>
+      <div class="node-body">
+        <p class="node-desc">Dynamic options overlays, advanced tax-loss harvesting, and precision timing to protect downside, generate income, and minimize taxable events.</p>
+      </div>
+    </div>
+
+    <div class="timeline-node" role="listitem" data-node="q">
+      <div class="node-head">
+        <div class="node-dot">Q</div>
+        <div class="node-title">Quantitative</div>
+      </div>
+      <div class="node-body">
+        <p class="node-desc">Institutional-grade analytics applied to after-tax outcomes&nbsp;— because a 12% return that keeps 9% beats a 14% return that keeps 7%.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const nodes = document.querySelectorAll('.timeline-node');
+
+  nodes.forEach(node => {
+    node.addEventListener('click', () => {
+      const wasActive = node.classList.contains('active');
+      nodes.forEach(n => n.classList.remove('active'));
+      if (!wasActive) node.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
