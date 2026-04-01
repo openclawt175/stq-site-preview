@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions — Hover List</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --navy: #1B2E4B; --cream: #F0EFEB; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: #fff; min-height: 100vh; }
+  .container { display: flex; min-height: 100vh; max-width: 1400px; margin: 0 auto; }
+  .left { flex: 0 0 50%; padding: 80px 48px 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .left h1 { font-family: 'Chakra Petch', sans-serif; font-size: 36px; font-weight: 600; margin-bottom: 48px; color: var(--cream); letter-spacing: -0.5px; }
+  .list-item {
+    display: flex; align-items: baseline; gap: 16px; padding: 18px 0;
+    border-bottom: 1px solid rgba(240,239,235,0.08); cursor: pointer;
+    transition: all 0.3s ease; position: relative;
+  }
+  .list-item::before {
+    content: ''; position: absolute; left: -24px; top: 50%; width: 3px; height: 0;
+    background: var(--cream); transform: translateY(-50%);
+    transition: height 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .list-item:hover::before, .list-item.active::before { height: 60%; }
+  .list-item .num {
+    font-family: 'Chakra Petch', sans-serif; font-size: 13px; font-weight: 600;
+    color: rgba(240,239,235,0.25); transition: color 0.3s ease; min-width: 28px;
+  }
+  .list-item .title {
+    font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 500;
+    color: rgba(240,239,235,0.5); transition: color 0.3s ease; line-height: 1.4;
+  }
+  .list-item:hover .title, .list-item.active .title { color: var(--cream); }
+  .list-item:hover .num, .list-item.active .num { color: rgba(240,239,235,0.6); }
+  .right {
+    flex: 0 0 50%; background: var(--cream); padding: 80px 64px;
+    display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
+  }
+  .desc-panel { display: none; animation: slideIn 0.4s ease; }
+  .desc-panel.active { display: block; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .desc-number {
+    font-family: 'Chakra Petch', sans-serif; font-size: 120px; font-weight: 700;
+    color: rgba(27,46,75,0.05); line-height: 1; margin-bottom: -20px;
+  }
+  .desc-title { font-family: 'Chakra Petch', sans-serif; font-size: 28px; font-weight: 600; color: var(--navy); margin-bottom: 20px; line-height: 1.3; }
+  .desc-text { font-size: 17px; line-height: 1.75; color: #4a5a6a; max-width: 440px; }
+  .desc-line { width: 48px; height: 2px; background: var(--navy); margin-top: 32px; opacity: 0.2; }
+  @media (max-width: 800px) {
+    .container { flex-direction: column; }
+    .left, .right { flex: none; padding: 48px 24px; }
+    .right { min-height: 320px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h1>Our Solutions</h1>
+      <div class="list-item active" data-idx="0"><span class="num">01</span><span class="title">Tax-Aware Portfolio Construction</span></div>
+      <div class="list-item" data-idx="1"><span class="num">02</span><span class="title">Advanced Tax-Loss Harvesting</span></div>
+      <div class="list-item" data-idx="2"><span class="num">03</span><span class="title">The Fortress Trade</span></div>
+      <div class="list-item" data-idx="3"><span class="num">04</span><span class="title">Synthetic Portfolio Lending</span></div>
+      <div class="list-item" data-idx="4"><span class="num">05</span><span class="title">Concentrated Stock Solutions</span></div>
+      <div class="list-item" data-idx="5"><span class="num">06</span><span class="title">Alternatives &amp; Private Markets</span></div>
+    </div>
+    <div class="right">
+      <div class="desc-panel active" data-desc="0">
+        <div class="desc-number">01</div>
+        <h2 class="desc-title">Tax-Aware Portfolio Construction</h2>
+        <p class="desc-text">Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets.</p>
+        <div class="desc-line"></div>
+      </div>
+      <div class="desc-panel" data-desc="1">
+        <div class="desc-number">02</div>
+        <h2 class="desc-title">Advanced Tax-Loss Harvesting</h2>
+        <p class="desc-text">Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more.</p>
+        <div class="desc-line"></div>
+      </div>
+      <div class="desc-panel" data-desc="2">
+        <div class="desc-number">03</div>
+        <h2 class="desc-title">The Fortress Trade</h2>
+        <p class="desc-text">Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</p>
+        <div class="desc-line"></div>
+      </div>
+      <div class="desc-panel" data-desc="3">
+        <div class="desc-number">04</div>
+        <h2 class="desc-title">Synthetic Portfolio Lending</h2>
+        <p class="desc-text">Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest.</p>
+        <div class="desc-line"></div>
+      </div>
+      <div class="desc-panel" data-desc="4">
+        <div class="desc-number">05</div>
+        <h2 class="desc-title">Concentrated Stock Solutions</h2>
+        <p class="desc-text">Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</p>
+        <div class="desc-line"></div>
+      </div>
+      <div class="desc-panel" data-desc="5">
+        <div class="desc-number">06</div>
+        <h2 class="desc-title">Alternatives &amp; Private Markets</h2>
+        <p class="desc-text">Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</p>
+        <div class="desc-line"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const items = document.querySelectorAll('.list-item');
+    const panels = document.querySelectorAll('.desc-panel');
+    function activate(idx) {
+      items.forEach(i => i.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      items[idx].classList.add('active');
+      panels[idx].classList.add('active');
+    }
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => activate(+item.dataset.idx));
+      item.addEventListener('click', () => activate(+item.dataset.idx));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions — Card Grid</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --navy: #1B2E4B; --cream: #F0EFEB; --navy-light: #2a4266; --navy-dark: #142238; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; padding: 80px 40px; }
+  .header { text-align: center; margin-bottom: 64px; }
+  .header h1 { font-family: 'Chakra Petch', sans-serif; font-size: 42px; font-weight: 600; letter-spacing: -0.5px; color: var(--navy); margin-bottom: 12px; }
+  .header p { font-size: 17px; color: #5a6a7a; max-width: 520px; margin: 0 auto; line-height: 1.6; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1120px; margin: 0 auto; }
+  .card {
+    background: #fff; border-radius: 16px; padding: 40px 32px 36px;
+    border: 1px solid rgba(27,46,75,0.08);
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease, border-color 0.3s ease;
+    cursor: default; position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--navy); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(27,46,75,0.1); border-color: rgba(27,46,75,0.15); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-number { font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 600; color: rgba(27,46,75,0.3); letter-spacing: 1px; margin-bottom: 20px; }
+  .card:hover .card-number { color: var(--navy); }
+  .card h3 { font-family: 'Chakra Petch', sans-serif; font-size: 20px; font-weight: 600; line-height: 1.3; margin-bottom: 14px; color: var(--navy); }
+  .card p { font-size: 14.5px; line-height: 1.65; color: #5a6a7a; }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } body { padding: 48px 20px; } }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Our Solutions</h1>
+    <p>Institutional-grade strategies designed for tax-efficient wealth preservation and growth.</p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-number">01</div>
+      <h3>Tax-Aware Portfolio Construction</h3>
+      <p>Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets.</p>
+    </div>
+    <div class="card">
+      <div class="card-number">02</div>
+      <h3>Advanced Tax-Loss Harvesting</h3>
+      <p>Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more.</p>
+    </div>
+    <div class="card">
+      <div class="card-number">03</div>
+      <h3>The Fortress Trade</h3>
+      <p>Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</p>
+    </div>
+    <div class="card">
+      <div class="card-number">04</div>
+      <h3>Synthetic Portfolio Lending</h3>
+      <p>Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest.</p>
+    </div>
+    <div class="card">
+      <div class="card-number">05</div>
+      <h3>Concentrated Stock Solutions</h3>
+      <p>Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</p>
+    </div>
+    <div class="card">
+      <div class="card-number">06</div>
+      <h3>Alternatives &amp; Private Markets</h3>
+      <p>Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</p>
+    </div>
+  </div>
+</body>
+</html>

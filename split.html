@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions — Split View</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --navy: #1B2E4B; --cream: #F0EFEB; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; }
+  .wrapper { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
+  .header { margin-bottom: 56px; }
+  .header h1 { font-family: 'Chakra Petch', sans-serif; font-size: 42px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .header p { font-size: 17px; color: #5a6a7a; line-height: 1.6; }
+  .split { display: flex; gap: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(27,46,75,0.08); }
+  .split-left { flex: 0 0 380px; background: var(--navy); padding: 8px; }
+  .split-btn {
+    display: block; width: 100%; text-align: left; background: none; border: none;
+    font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 500;
+    color: rgba(240,239,235,0.45); padding: 20px 24px; cursor: pointer;
+    border-radius: 10px; transition: all 0.3s ease; position: relative;
+    margin-bottom: 2px;
+  }
+  .split-btn .btn-num {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    display: block; margin-bottom: 4px; opacity: 0.4; transition: opacity 0.3s ease;
+  }
+  .split-btn:hover { color: rgba(240,239,235,0.8); background: rgba(240,239,235,0.05); }
+  .split-btn:hover .btn-num { opacity: 0.6; }
+  .split-btn.active { color: var(--cream); background: rgba(240,239,235,0.1); }
+  .split-btn.active .btn-num { opacity: 0.8; }
+  .split-right { flex: 1; background: #fff; padding: 64px 56px; position: relative; overflow: hidden; min-height: 480px; display: flex; align-items: center; }
+  .content-panel { display: none; animation: panelIn 0.45s cubic-bezier(0.25,0.46,0.45,0.94); width: 100%; }
+  .content-panel.active { display: block; }
+  @keyframes panelIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  .big-number {
+    font-family: 'Chakra Petch', sans-serif; font-size: 180px; font-weight: 700;
+    color: rgba(27,46,75,0.04); line-height: 1; position: absolute; right: 40px; top: 20px;
+    transition: all 0.4s ease; pointer-events: none;
+  }
+  .content-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(27,46,75,0.3); margin-bottom: 16px;
+  }
+  .content-title { font-family: 'Chakra Petch', sans-serif; font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: 24px; color: var(--navy); }
+  .content-desc { font-size: 17px; line-height: 1.8; color: #4a5a6a; max-width: 480px; }
+  .content-divider { width: 48px; height: 2px; background: var(--navy); margin-top: 36px; opacity: 0.15; }
+  @media (max-width: 800px) {
+    .split { flex-direction: column; }
+    .split-left { flex: none; display: flex; overflow-x: auto; padding: 8px; gap: 4px; }
+    .split-btn { white-space: nowrap; min-width: auto; margin-bottom: 0; }
+    .split-right { padding: 40px 24px; min-height: 340px; }
+    .wrapper { padding: 48px 20px; }
+    .big-number { font-size: 100px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <h1>Our Solutions</h1>
+      <p>Institutional-grade strategies designed for tax-efficient wealth preservation and growth.</p>
+    </div>
+    <div class="split">
+      <div class="split-left">
+        <button class="split-btn active" data-idx="0"><span class="btn-num">01</span>Tax-Aware Portfolio Construction</button>
+        <button class="split-btn" data-idx="1"><span class="btn-num">02</span>Advanced Tax-Loss Harvesting</button>
+        <button class="split-btn" data-idx="2"><span class="btn-num">03</span>The Fortress Trade</button>
+        <button class="split-btn" data-idx="3"><span class="btn-num">04</span>Synthetic Portfolio Lending</button>
+        <button class="split-btn" data-idx="4"><span class="btn-num">05</span>Concentrated Stock Solutions</button>
+        <button class="split-btn" data-idx="5"><span class="btn-num">06</span>Alternatives &amp; Private Markets</button>
+      </div>
+      <div class="split-right">
+        <div class="big-number" id="bigNum">01</div>
+        <div class="content-panel active" data-panel="0">
+          <div class="content-label">Solution 01</div>
+          <h2 class="content-title">Tax-Aware Portfolio Construction</h2>
+          <p class="content-desc">Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets.</p>
+          <div class="content-divider"></div>
+        </div>
+        <div class="content-panel" data-panel="1">
+          <div class="content-label">Solution 02</div>
+          <h2 class="content-title">Advanced Tax-Loss Harvesting</h2>
+          <p class="content-desc">Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more.</p>
+          <div class="content-divider"></div>
+        </div>
+        <div class="content-panel" data-panel="2">
+          <div class="content-label">Solution 03</div>
+          <h2 class="content-title">The Fortress Trade</h2>
+          <p class="content-desc">Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</p>
+          <div class="content-divider"></div>
+        </div>
+        <div class="content-panel" data-panel="3">
+          <div class="content-label">Solution 04</div>
+          <h2 class="content-title">Synthetic Portfolio Lending</h2>
+          <p class="content-desc">Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest.</p>
+          <div class="content-divider"></div>
+        </div>
+        <div class="content-panel" data-panel="4">
+          <div class="content-label">Solution 05</div>
+          <h2 class="content-title">Concentrated Stock Solutions</h2>
+          <p class="content-desc">Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</p>
+          <div class="content-divider"></div>
+        </div>
+        <div class="content-panel" data-panel="5">
+          <div class="content-label">Solution 06</div>
+          <h2 class="content-title">Alternatives &amp; Private Markets</h2>
+          <p class="content-desc">Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</p>
+          <div class="content-divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const nums = ['01','02','03','04','05','06'];
+    const btns = document.querySelectorAll('.split-btn');
+    const panels = document.querySelectorAll('.content-panel');
+    const bigNum = document.getElementById('bigNum');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = +btn.dataset.idx;
+        btns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        panels[idx].classList.add('active');
+        bigNum.textContent = nums[idx];
+      });
+    });
+  </script>
+</body>
+</html>
