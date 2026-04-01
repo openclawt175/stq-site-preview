@@ -1013,6 +1013,11 @@ footer {
   .stat-item:nth-child(odd)::after { display: block; }
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .nav-client-login {
   font-family: var(--font-heading);
   font-size: 0.8125rem;
@@ -1024,7 +1029,6 @@ footer {
   border: 1px solid rgba(27, 46, 75, 0.2);
   border-radius: 4px;
   padding: 12px 28px;
-  margin-right: 12px;
   display: inline-flex;
   align-items: center;
   transition: border-color 0.2s ease, background 0.2s ease;
@@ -1112,8 +1116,10 @@ footer {
       <a href="#insights">Insights</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#" class="nav-client-login">Client Login</a>
-    <a href="#contact" class="btn btn-primary nav-cta-desktop">Schedule a Meeting</a>
+    <div class="nav-actions">
+      <a href="#" class="nav-client-login">Client Login</a>
+      <a href="#contact" class="btn btn-primary nav-cta-desktop">Schedule a Meeting</a>
+    </div>
     <button class="nav-toggle" onclick="document.querySelector('.mobile-nav').classList.add('active')" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
