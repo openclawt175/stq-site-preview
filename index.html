@@ -385,14 +385,25 @@ nav {
   border-right: 1px solid rgba(27,46,75,0.10);
 }
 .sol-heading {
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--navy);
-  opacity: 0.4;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 20px;
   margin-bottom: 40px;
+}
+.sol-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: currentColor;
+  opacity: 0.5;
 }
 .sol-item {
   display: flex;
