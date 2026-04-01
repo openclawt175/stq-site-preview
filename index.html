@@ -377,17 +377,18 @@ nav {
 }
 .sol-left {
   flex: 0 0 50%;
-  background: var(--navy);
+  background: var(--cream);
   padding: 80px 48px 80px 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-right: 1px solid rgba(27,46,75,0.10);
 }
 .sol-heading {
   font-family: var(--font-heading);
   font-size: 32px;
   font-weight: 600;
-  color: var(--cream);
+  color: var(--navy);
   margin-bottom: 40px;
   letter-spacing: -0.5px;
 }
@@ -396,7 +397,7 @@ nav {
   align-items: baseline;
   gap: 16px;
   padding: 16px 0;
-  border-bottom: 1px solid rgba(240,239,235,0.08);
+  border-bottom: 1px solid rgba(27,46,75,0.08);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -408,7 +409,7 @@ nav {
   top: 50%;
   width: 3px;
   height: 0;
-  background: var(--cream);
+  background: var(--navy);
   transform: translateY(-50%);
   transition: height 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
 }
@@ -417,7 +418,7 @@ nav {
   font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 600;
-  color: rgba(240,239,235,0.25);
+  color: rgba(27,46,75,0.20);
   transition: color 0.3s ease;
   min-width: 28px;
 }
@@ -425,12 +426,24 @@ nav {
   font-family: var(--font-heading);
   font-size: 16px;
   font-weight: 500;
-  color: rgba(240,239,235,0.45);
+  color: rgba(27,46,75,0.40);
   transition: color 0.3s ease;
   line-height: 1.4;
 }
-.sol-item:hover .sol-title, .sol-item.active .sol-title { color: var(--cream); }
-.sol-item:hover .sol-num, .sol-item.active .sol-num { color: rgba(240,239,235,0.6); }
+.sol-tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(27,46,75,0.25);
+  transition: color 0.3s ease;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.sol-item:hover .sol-title, .sol-item.active .sol-title { color: var(--navy); }
+.sol-item:hover .sol-num, .sol-item.active .sol-num { color: rgba(27,46,75,0.5); }
+.sol-item:hover .sol-tag, .sol-item.active .sol-tag { color: rgba(27,46,75,0.4); }
 .sol-right {
   flex: 0 0 50%;
   background: var(--cream);
@@ -996,14 +1009,14 @@ footer {
 <section class="solutions-hover" id="solutions">
   <div class="sol-left">
     <h2 class="sol-heading reveal">Our Solutions</h2>
-    <div class="sol-item active" data-idx="0"><span class="sol-num">01</span><span class="sol-title">Tax-Aware Portfolio Construction</span></div>
-    <div class="sol-item" data-idx="1"><span class="sol-num">02</span><span class="sol-title">Advanced Tax-Loss Harvesting</span></div>
-    <div class="sol-item" data-idx="2"><span class="sol-num">03</span><span class="sol-title">The Fortress Trade</span></div>
-    <div class="sol-item" data-idx="3"><span class="sol-num">04</span><span class="sol-title">Synthetic Portfolio Lending</span></div>
-    <div class="sol-item" data-idx="4"><span class="sol-num">05</span><span class="sol-title">Concentrated Stock Solutions</span></div>
-    <div class="sol-item" data-idx="5"><span class="sol-num">06</span><span class="sol-title">Alternatives & Private Markets</span></div>
-    <div class="sol-item" data-idx="6"><span class="sol-num">07</span><span class="sol-title">Outcome Strategies</span></div>
-    <div class="sol-item" data-idx="7"><span class="sol-num">08</span><span class="sol-title">Estate & Philanthropic Planning</span></div>
+    <div class="sol-item active" data-idx="0"><span class="sol-num">01</span><span class="sol-title">Tax-Aware Portfolio Construction</span><span class="sol-tag">Core Strategy</span></div>
+    <div class="sol-item" data-idx="1"><span class="sol-num">02</span><span class="sol-title">Advanced Tax-Loss Harvesting</span><span class="sol-tag">Tax Optimization</span></div>
+    <div class="sol-item" data-idx="2"><span class="sol-num">03</span><span class="sol-title">The Fortress Trade</span><span class="sol-tag">Risk Management</span></div>
+    <div class="sol-item" data-idx="3"><span class="sol-num">04</span><span class="sol-title">Synthetic Portfolio Lending</span><span class="sol-tag">Liquidity</span></div>
+    <div class="sol-item" data-idx="4"><span class="sol-num">05</span><span class="sol-title">Concentrated Stock Solutions</span><span class="sol-tag">Diversification</span></div>
+    <div class="sol-item" data-idx="5"><span class="sol-num">06</span><span class="sol-title">Alternatives & Private Markets</span><span class="sol-tag">Alternatives</span></div>
+    <div class="sol-item" data-idx="6"><span class="sol-num">07</span><span class="sol-title">Outcome Strategies</span><span class="sol-tag">Options Overlay</span></div>
+    <div class="sol-item" data-idx="7"><span class="sol-num">08</span><span class="sol-title">Estate & Philanthropic Planning</span><span class="sol-tag">Wealth Transfer</span></div>
   </div>
   <div class="sol-right">
     <div class="sol-panel active" data-desc="0">
