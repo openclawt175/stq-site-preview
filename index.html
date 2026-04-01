@@ -1014,7 +1014,23 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .nav-links, .nav-cta-desktop { display: none; }
+  .nav-links, .nav-client-login {
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: none;
+  border: 1px solid rgba(27, 46, 75, 0.2);
+  padding: 9px 18px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.nav-client-login:hover {
+  border-color: rgba(27, 46, 75, 0.5);
+  background: rgba(27, 46, 75, 0.03);
+}
+.nav-cta-desktop { display: none; }
   .nav-toggle { display: flex; }
   .hero h1 { font-size: 2.5rem; }
   .framework-grid { grid-template-columns: 1fr; }
@@ -1091,6 +1107,7 @@ footer {
       <a href="#insights">Insights</a>
       <a href="#contact">Contact</a>
     </div>
+    <a href="#" class="nav-client-login">Client Login</a>
     <a href="#contact" class="btn btn-primary nav-cta-desktop">Schedule a Meeting</a>
     <button class="nav-toggle" onclick="document.querySelector('.mobile-nav').classList.add('active')" aria-label="Open menu">
       <span></span><span></span><span></span>
