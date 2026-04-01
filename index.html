@@ -370,7 +370,116 @@ nav {
   color: var(--text-secondary);
 }
 
-/* ========== SOLUTIONS ACCORDION ========== */
+/* ========== SOLUTIONS HOVER LIST ========== */
+.solutions-hover {
+  display: flex;
+  min-height: 600px;
+}
+.sol-left {
+  flex: 0 0 50%;
+  background: var(--navy);
+  padding: 80px 48px 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sol-heading {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+.sol-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(240,239,235,0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.sol-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  background: var(--cream);
+  transform: translateY(-50%);
+  transition: height 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.sol-item:hover::before, .sol-item.active::before { height: 60%; }
+.sol-num {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(240,239,235,0.25);
+  transition: color 0.3s ease;
+  min-width: 28px;
+}
+.sol-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(240,239,235,0.45);
+  transition: color 0.3s ease;
+  line-height: 1.4;
+}
+.sol-item:hover .sol-title, .sol-item.active .sol-title { color: var(--cream); }
+.sol-item:hover .sol-num, .sol-item.active .sol-num { color: rgba(240,239,235,0.6); }
+.sol-right {
+  flex: 0 0 50%;
+  background: var(--cream);
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.sol-panel { display: none; animation: solSlideIn 0.4s ease; }
+.sol-panel.active { display: block; }
+@keyframes solSlideIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.sol-panel-num {
+  font-family: var(--font-heading);
+  font-size: 100px;
+  font-weight: 700;
+  color: rgba(27,46,75,0.05);
+  line-height: 1;
+  margin-bottom: -16px;
+}
+.sol-panel-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.sol-panel-text {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #4a5a6a;
+  max-width: 440px;
+}
+.sol-panel-line {
+  width: 48px;
+  height: 2px;
+  background: var(--navy);
+  margin-top: 32px;
+  opacity: 0.2;
+}
+@media (max-width: 800px) {
+  .solutions-hover { flex-direction: column; }
+  .sol-left, .sol-right { flex: none; padding: 48px 24px; }
+  .sol-right { min-height: 320px; }
+}
+
+/* ========== SOLUTIONS ACCORDION (replaced) ========== */
 .solutions-list { width: 100%; }
 .solutions-list details {
   border-bottom: 1px solid rgba(27, 46, 75, 0.1);
@@ -883,47 +992,67 @@ footer {
   </div>
 </section>
 
-<!-- ========== SOLUTIONS ========== -->
-<section class="split-section" id="solutions">
-  <div class="container">
-    <div class="split-grid">
-      <div class="split-label">
-        <div class="section-label reveal">Our Solutions</div>
-      </div>
-      <div class="solutions-list reveal">
-        <details>
-          <summary>Tax-Aware Portfolio Construction</summary>
-          <div class="solution-content">Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets. We structure portfolios to limit avoidable taxable events and control turnover.</div>
-        </details>
-        <details>
-          <summary>Advanced Tax-Loss Harvesting</summary>
-          <div class="solution-content">Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more. Harvested losses never expire.</div>
-        </details>
-        <details>
-          <summary>The Fortress Trade</summary>
-          <div class="solution-content">Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</div>
-        </details>
-        <details>
-          <summary>Synthetic Portfolio Lending</summary>
-          <div class="solution-content">Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest. Rates your bank can't match.</div>
-        </details>
-        <details>
-          <summary>Concentrated Stock Solutions</summary>
-          <div class="solution-content">Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</div>
-        </details>
-        <details>
-          <summary>Alternatives & Private Markets</summary>
-          <div class="solution-content">Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</div>
-        </details>
-        <details>
-          <summary>Outcome Strategies</summary>
-          <div class="solution-content">Income, protection, and growth strategies using options to generate cash flow, buffer downside, or enhance participation in rising markets.</div>
-        </details>
-        <details>
-          <summary>Estate & Philanthropic Planning</summary>
-          <div class="solution-content">Coordinated estate strategies including DAFs, step-up planning, and tax-efficient wealth transfer in collaboration with your attorney and CPA.</div>
-        </details>
-      </div>
+<!-- ========== SOLUTIONS (Hover List) ========== -->
+<section class="solutions-hover" id="solutions">
+  <div class="sol-left">
+    <h2 class="sol-heading reveal">Our Solutions</h2>
+    <div class="sol-item active" data-idx="0"><span class="sol-num">01</span><span class="sol-title">Tax-Aware Portfolio Construction</span></div>
+    <div class="sol-item" data-idx="1"><span class="sol-num">02</span><span class="sol-title">Advanced Tax-Loss Harvesting</span></div>
+    <div class="sol-item" data-idx="2"><span class="sol-num">03</span><span class="sol-title">The Fortress Trade</span></div>
+    <div class="sol-item" data-idx="3"><span class="sol-num">04</span><span class="sol-title">Synthetic Portfolio Lending</span></div>
+    <div class="sol-item" data-idx="4"><span class="sol-num">05</span><span class="sol-title">Concentrated Stock Solutions</span></div>
+    <div class="sol-item" data-idx="5"><span class="sol-num">06</span><span class="sol-title">Alternatives & Private Markets</span></div>
+    <div class="sol-item" data-idx="6"><span class="sol-num">07</span><span class="sol-title">Outcome Strategies</span></div>
+    <div class="sol-item" data-idx="7"><span class="sol-num">08</span><span class="sol-title">Estate & Philanthropic Planning</span></div>
+  </div>
+  <div class="sol-right">
+    <div class="sol-panel active" data-desc="0">
+      <div class="sol-panel-num">01</div>
+      <h3 class="sol-panel-title">Tax-Aware Portfolio Construction</h3>
+      <p class="sol-panel-text">Our diversified portfolio framework is built to strategically adapt to an evolving macroeconomic landscape while maintaining disciplined long-term allocation targets. We structure portfolios to limit avoidable taxable events and control turnover.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="1">
+      <div class="sol-panel-num">02</div>
+      <h3 class="sol-panel-title">Advanced Tax-Loss Harvesting</h3>
+      <p class="sol-panel-text">Beyond simple periodic harvesting — long-short strategies create a richer opportunity set for realizing losses to offset gains from real estate, business sales, concentrated stock, RSU vesting, and more. Harvested losses never expire.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="2">
+      <div class="sol-panel-num">03</div>
+      <h3 class="sol-panel-title">The Fortress Trade</h3>
+      <p class="sol-panel-text">Our signature SPX options structure absorbs the first 15% of any market drop while keeping unlimited upside. Section 1256 tax treatment. Built directly in your account.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="3">
+      <div class="sol-panel-num">04</div>
+      <h3 class="sol-panel-title">Synthetic Portfolio Lending</h3>
+      <p class="sol-panel-text">Borrow against your portfolio at near-Treasury rates through box spreads. No bank approval, no credit check, tax-deductible interest. Rates your bank can't match.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="4">
+      <div class="sol-panel-num">05</div>
+      <h3 class="sol-panel-title">Concentrated Stock Solutions</h3>
+      <p class="sol-panel-text">Hedge, diversify, or unwind a single-stock position without triggering massive tax liability. Protective puts, exchange fund replication, synthetic forwards.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="5">
+      <div class="sol-panel-num">06</div>
+      <h3 class="sol-panel-title">Alternatives & Private Markets</h3>
+      <p class="sol-panel-text">Tax-aware placement of alternative investments in the right accounts — private credit, venture, real estate — optimized for after-tax outcomes.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="6">
+      <div class="sol-panel-num">07</div>
+      <h3 class="sol-panel-title">Outcome Strategies</h3>
+      <p class="sol-panel-text">Income, protection, and growth strategies using options to generate cash flow, buffer downside, or enhance participation in rising markets.</p>
+      <div class="sol-panel-line"></div>
+    </div>
+    <div class="sol-panel" data-desc="7">
+      <div class="sol-panel-num">08</div>
+      <h3 class="sol-panel-title">Estate & Philanthropic Planning</h3>
+      <p class="sol-panel-text">Coordinated estate strategies including DAFs, step-up planning, and tax-efficient wealth transfer in collaboration with your attorney and CPA.</p>
+      <div class="sol-panel-line"></div>
     </div>
   </div>
 </section>
@@ -1069,5 +1198,20 @@ footer {
 })();
 </script>
 
+<script>
+// Solutions hover list
+const solItems = document.querySelectorAll('.sol-item');
+const solPanels = document.querySelectorAll('.sol-panel');
+function activateSol(idx) {
+  solItems.forEach(i => i.classList.remove('active'));
+  solPanels.forEach(p => p.classList.remove('active'));
+  if (solItems[idx]) solItems[idx].classList.add('active');
+  if (solPanels[idx]) solPanels[idx].classList.add('active');
+}
+solItems.forEach(item => {
+  item.addEventListener('mouseenter', () => activateSol(+item.dataset.idx));
+  item.addEventListener('click', () => activateSol(+item.dataset.idx));
+});
+</script>
 </body>
 </html>
