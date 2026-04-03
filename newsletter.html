@@ -26,10 +26,14 @@
     table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
     img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
     body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; background-color: #E6E4DE; }
-    /* Dark mode overrides */
+    /* Dark mode overrides — Apple Mail, iOS, Gmail app */
+    :root { color-scheme: light dark; supported-color-schemes: light dark; }
     @media (prefers-color-scheme: dark) {
-      .email-bg { background-color: #1a1a1a !important; }
-      .email-body { background-color: #2a2a2a !important; }
+      body, .email-bg, [data-ogsb] { background-color: #1B2E4B !important; }
+      .email-body, [data-ogsc] { background-color: #223755 !important; color: #F0EFEB !important; }
+      h1, h2, h3, p, td, span, a, div { color: #F0EFEB !important; }
+      .email-body td { color: #d4d1ca !important; }
+      .email-body h1, .email-body h2 { color: #F0EFEB !important; }
     }
     /* Mobile */
     @media only screen and (max-width: 620px) {
