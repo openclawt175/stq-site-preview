@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STQ Capital Partners — Brand Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F0EFEB;
+    color: #1B2E4B;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Variables ────────────────────────────────── */
+  :root {
+    --navy:       #1B2E4B;
+    --cream:      #F0EFEB;
+    --cream-dark: #E6E4DE;
+    --muted:      #6B7280;
+    --white:      #FFFFFF;
+    --max-w:      1120px;
+    --section-py: 96px;
+  }
+
+  /* ── Layout ───────────────────────────────────── */
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+  section { padding: var(--section-py) 0; }
+  section + section { border-top: 1px solid var(--cream-dark); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+
+  /* ── Typography ───────────────────────────────── */
+  h1, h2, h3, h4 { font-family: 'Chakra Petch', sans-serif; font-weight: 700; }
+  h1 { font-size: 48px; letter-spacing: -0.5px; line-height: 1.1; }
+  h2 { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
+  h3 { font-size: 28px; margin-bottom: 16px; }
+  p.lead { font-size: 18px; color: var(--muted); max-width: 560px; }
+  p.body-text { font-size: 15px; color: var(--muted); line-height: 1.7; }
+  .caption { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; margin-top: 8px; }
+  .mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; }
+
+  /* ── Hero ──────────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: 'STQ';
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 320px;
+    color: rgba(240, 239, 235, 0.03);
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero h1 { color: var(--cream); margin-bottom: 16px; }
+  .hero p { color: #9CA3AF; font-size: 18px; }
+  .hero .label {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #9CA3AF;
+    border: 1px solid rgba(156,163,175,0.25);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+
+  /* ── Logo Display Boxes ───────────────────────── */
+  .logo-box {
+    border-radius: 12px;
+    padding: 56px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    position: relative;
+  }
+  .logo-box.light {
+    background: var(--cream);
+    border: 1px solid var(--cream-dark);
+  }
+  .logo-box.dark {
+    background: var(--navy);
+  }
+  .logo-box.white {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+  }
+  .logo-text {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .logo-text .mark { font-weight: 700; }
+  .logo-text .sub { font-weight: 400; margin-left: 2px; }
+
+  /* ── Color Swatches ───────────────────────────── */
+  .swatch-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+  }
+  .swatch-block {
+    height: 120px;
+    width: 100%;
+  }
+  .swatch-info {
+    padding: 16px 18px;
+  }
+  .swatch-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .swatch-vals {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .swatch-vals span { display: block; }
+
+  /* ── Typography Samples ───────────────────────── */
+  .type-sample {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 40px;
+    border: 1px solid var(--cream-dark);
+  }
+  .type-sample + .type-sample { margin-top: 24px; }
+  .type-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--cream-dark);
+  }
+  .type-meta span {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--cream);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ── Clearzone ────────────────────────────────── */
+  .clearzone-demo {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--cream-dark);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .clearzone-inner {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 32px 48px;
+  }
+  .clearzone-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px dashed #E6E4DE;
+    border-radius: 8px;
+  }
+  .cz-marker {
+    position: absolute;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .cz-marker.top { top: 8px; left: 50%; transform: translateX(-50%); }
+  .cz-marker.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+  .cz-marker.left { left: 8px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+  .cz-marker.right { right: 8px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+  /* ── Do's & Don'ts ────────────────────────────── */
+  .do-dont-card {
+    border-radius: 12px;
+    padding: 32px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .do-card {
+    background: var(--white);
+    border: 2px solid #22C55E;
+  }
+  .dont-card {
+    background: var(--white);
+    border: 2px solid #EF4444;
+  }
+  .do-dont-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 100px;
+  }
+  .do-label { color: #22C55E; background: #F0FDF4; }
+  .dont-label { color: #EF4444; background: #FEF2F2; }
+  .do-dont-desc { font-size: 13px; color: var(--muted); }
+
+  /* ── Watermark Section ────────────────────────── */
+  .watermark-demo {
+    background: var(--white);
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    padding: 64px 48px;
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .watermark-demo::before {
+    content: 'STQ';
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 180px;
+    color: var(--navy);
+    opacity: 0.04;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+  }
+  .watermark-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  /* ── Nav ───────────────────────────────────────── */
+  .side-nav {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .side-nav a {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cream-dark);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .side-nav a:hover {
+    background: var(--navy);
+    transform: scale(1.5);
+  }
+
+  /* ── Footer ───────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    padding: 48px 0;
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 13px;
+  }
+  footer .logo-text { font-size: 20px; margin-bottom: 12px; }
+
+  /* ── Responsive ───────────────────────────────── */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-5 { grid-template-columns: 1fr; }
+    h1 { font-size: 36px; }
+    .container { padding: 0 24px; }
+    section { padding: 64px 0; }
+    .side-nav { display: none; }
+    .hero::after { font-size: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation dots -->
+<nav class="side-nav">
+  <a href="#hero" title="Top"></a>
+  <a href="#logo" title="Logo"></a>
+  <a href="#colors" title="Colors"></a>
+  <a href="#typography" title="Typography"></a>
+  <a href="#clearzone" title="Clearzone"></a>
+  <a href="#dos-donts" title="Do's & Don'ts"></a>
+  <a href="#watermark" title="Watermark"></a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HERO                                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<header class="hero" id="hero">
+  <div class="container">
+    <div class="label">Brand Guidelines — v1.0</div>
+    <h1>STQ Capital<br>Partners</h1>
+    <p style="margin-top: 24px; max-width: 480px;">
+      A comprehensive guide to the visual identity of STQ Capital Partners. 
+      Use this document to ensure consistency across all touchpoints.
+    </p>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- LOGO USAGE                                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="logo">
+  <div class="container">
+    <h2>01 — Logo</h2>
+    <h3>Primary Logo</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      The STQ logotype pairs bold geometric letterforms with a refined secondary line. 
+      The forward slash acts as a visual divider, conveying structure and precision.
+    </p>
+
+    <div class="grid-2">
+      <!-- Light background -->
+      <div>
+        <div class="logo-box light">
+          <div class="logo-text">
+            <span class="mark" style="color: #1B2E4B;">STQ</span>
+            <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+          </div>
+        </div>
+        <p class="caption">Primary — on cream / light backgrounds</p>
+      </div>
+
+      <!-- Dark background -->
+      <div>
+        <div class="logo-box dark">
+          <div class="logo-text">
+            <span class="mark" style="color: #F0EFEB;">STQ</span>
+            <span class="sub" style="color: #9CA3AF;">/ Capital Partners</span>
+          </div>
+        </div>
+        <p class="caption">Reversed — on navy / dark backgrounds</p>
+      </div>
+
+      <!-- White background -->
+      <div>
+        <div class="logo-box white">
+          <div class="logo-text">
+            <span class="mark" style="color: #1B2E4B;">STQ</span>
+            <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+          </div>
+        </div>
+        <p class="caption">Primary — on white backgrounds</p>
+      </div>
+
+      <!-- Icon mark -->
+      <div>
+        <div class="logo-box light" style="background: var(--cream-dark);">
+          <div class="logo-text" style="font-size: 48px;">
+            <span class="mark" style="color: #1B2E4B;">STQ</span>
+          </div>
+        </div>
+        <p class="caption">Icon mark — compact usage (favicons, avatars)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- COLOR PALETTE                                  -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="colors">
+  <div class="container">
+    <h2>02 — Color Palette</h2>
+    <h3>Brand Colors</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      A restrained, institutional palette that communicates trust, sophistication, and clarity.
+    </p>
+
+    <div class="grid-5">
+      <!-- Navy -->
+      <div class="swatch-card">
+        <div class="swatch-block" style="background: #1B2E4B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Navy</div>
+          <div class="swatch-vals">
+            <span class="mono">#1B2E4B</span>
+            <span>RGB 27, 46, 75</span>
+            <span>Primary</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cream -->
+      <div class="swatch-card">
+        <div class="swatch-block" style="background: #F0EFEB; border-bottom: 1px solid #E6E4DE;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-vals">
+            <span class="mono">#F0EFEB</span>
+            <span>RGB 240, 239, 235</span>
+            <span>Background</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cream Dark -->
+      <div class="swatch-card">
+        <div class="swatch-block" style="background: #E6E4DE; border-bottom: 1px solid #D6D4CE;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream Dark</div>
+          <div class="swatch-vals">
+            <span class="mono">#E6E4DE</span>
+            <span>RGB 230, 228, 222</span>
+            <span>Secondary BG</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Muted -->
+      <div class="swatch-card">
+        <div class="swatch-block" style="background: #6B7280;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Muted</div>
+          <div class="swatch-vals">
+            <span class="mono">#6B7280</span>
+            <span>RGB 107, 114, 128</span>
+            <span>Secondary text</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- White -->
+      <div class="swatch-card">
+        <div class="swatch-block" style="background: #FFFFFF; border-bottom: 1px solid #E6E4DE;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">White</div>
+          <div class="swatch-vals">
+            <span class="mono">#FFFFFF</span>
+            <span>RGB 255, 255, 255</span>
+            <span>Cards, surfaces</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color usage guidance -->
+    <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div style="background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 32px;">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Primary usage</h4>
+        <p class="body-text">Navy is used for headlines, primary text, logo mark, and key interactive elements. It anchors the brand visually.</p>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 32px;">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Background usage</h4>
+        <p class="body-text">Cream and white alternate as background surfaces. Navy serves as a premium dark background for hero sections and CTAs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TYPOGRAPHY                                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="typography">
+  <div class="container">
+    <h2>03 — Typography</h2>
+    <h3>Type System</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      Two complementary typefaces — Chakra Petch for impact, DM Sans for readability.
+    </p>
+
+    <!-- Heading font -->
+    <div class="type-sample">
+      <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 56px; color: var(--navy); line-height: 1.1; letter-spacing: -0.5px;">
+        Chakra Petch
+      </div>
+      <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 400; font-size: 24px; color: var(--muted); margin-top: 8px;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      </div>
+      <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 400; font-size: 24px; color: var(--muted);">
+        abcdefghijklmnopqrstuvwxyz 0123456789
+      </div>
+      <div class="type-meta">
+        <span>Headings &amp; Logo</span>
+        <span>Google Fonts</span>
+        <span>Weights: 300, 400, 600, 700</span>
+      </div>
+    </div>
+
+    <!-- Body font -->
+    <div class="type-sample">
+      <div style="font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 40px; color: var(--navy); line-height: 1.2;">
+        DM Sans
+      </div>
+      <div style="font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 24px; color: var(--muted); margin-top: 8px;">
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+      </div>
+      <div style="font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 24px; color: var(--muted);">
+        abcdefghijklmnopqrstuvwxyz 0123456789
+      </div>
+      <div class="type-meta">
+        <span>Body &amp; UI</span>
+        <span>Google Fonts</span>
+        <span>Weights: 300, 400, 500, 600, 700</span>
+      </div>
+    </div>
+
+    <!-- Scale -->
+    <div style="margin-top: 40px;">
+      <h4 style="font-size: 15px; margin-bottom: 24px;">Type Scale</h4>
+      <div style="background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 40px;">
+        <div style="margin-bottom: 32px;">
+          <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 48px; color: var(--navy); line-height: 1.1;">Display — 48px / Bold</div>
+          <span class="caption">Hero headings, key statements</span>
+        </div>
+        <div style="margin-bottom: 32px;">
+          <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 32px; color: var(--navy); line-height: 1.2;">Heading 1 — 32px / Bold</div>
+          <span class="caption">Section headings</span>
+        </div>
+        <div style="margin-bottom: 32px;">
+          <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 24px; color: var(--navy); line-height: 1.3;">Heading 2 — 24px / Semibold</div>
+          <span class="caption">Subsection headings</span>
+        </div>
+        <div style="margin-bottom: 32px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 18px; color: var(--muted); line-height: 1.6;">
+            Lead text — 18px / Regular. Used for introductory paragraphs and key callouts that need emphasis without the weight of a heading.
+          </div>
+          <span class="caption">Intro paragraphs, callouts</span>
+        </div>
+        <div style="margin-bottom: 32px;">
+          <div style="font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 15px; color: var(--muted); line-height: 1.7;">
+            Body text — 15px / Regular. The default paragraph style used across all long-form content. Optimized for comfortable reading at extended lengths. Line height is set to 1.7 for optimal legibility.
+          </div>
+          <span class="caption">Body copy, descriptions</span>
+        </div>
+        <div>
+          <div style="font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 12px; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase;">
+            Caption — 12px / Medium, Uppercase
+          </div>
+          <span class="caption">Labels, metadata, captions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CLEARZONE                                      -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="clearzone">
+  <div class="container">
+    <h2>04 — Spacing &amp; Clear Zone</h2>
+    <h3>Logo Protection Area</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      Maintain a minimum clear zone equal to the height of the "S" in STQ on all sides. 
+      No text, graphics, or other elements may intrude into this space.
+    </p>
+
+    <div class="clearzone-demo">
+      <div class="clearzone-inner">
+        <span class="cz-marker top">S-height</span>
+        <span class="cz-marker bottom">S-height</span>
+        <span class="cz-marker left">S-height</span>
+        <span class="cz-marker right">S-height</span>
+        <div class="logo-text" style="font-size: 28px;">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+          <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 32px;">
+      <div style="background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 32px;">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Minimum size</h4>
+        <p class="body-text">The logo should never be displayed smaller than 120px wide (digital) or 30mm (print) to maintain legibility of the secondary text.</p>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 32px;">
+        <h4 style="font-size: 15px; margin-bottom: 12px;">Icon mark minimum</h4>
+        <p class="body-text">The STQ icon mark can be used as small as 24px (favicons) but should be at least 48px for general use to maintain stroke clarity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- DO'S AND DON'TS                                -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="dos-donts">
+  <div class="container">
+    <h2>05 — Do's &amp; Don'ts</h2>
+    <h3>Logo Usage Rules</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      Consistent application protects brand equity. Follow these rules to maintain visual integrity.
+    </p>
+
+    <div class="grid-3">
+      <!-- DO's -->
+      <div class="do-dont-card do-card">
+        <span class="do-dont-label do-label">✓ Do</span>
+        <div class="logo-text" style="font-size: 18px;">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+          <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Use the logo in approved colors on appropriate backgrounds</p>
+      </div>
+
+      <div class="do-dont-card do-card">
+        <span class="do-dont-label do-label">✓ Do</span>
+        <div class="logo-text" style="font-size: 24px;">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+        </div>
+        <p class="do-dont-desc">Use the icon mark when space is limited</p>
+      </div>
+
+      <div class="do-dont-card do-card">
+        <span class="do-dont-label do-label">✓ Do</span>
+        <div style="background: var(--navy); border-radius: 8px; padding: 12px 20px;">
+          <div class="logo-text" style="font-size: 18px;">
+            <span class="mark" style="color: #F0EFEB;">STQ</span>
+            <span class="sub" style="color: #9CA3AF;">/ Capital Partners</span>
+          </div>
+        </div>
+        <p class="do-dont-desc">Use the reversed version on dark backgrounds</p>
+      </div>
+
+      <!-- DON'Ts -->
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div class="logo-text" style="font-size: 18px;">
+          <span class="mark" style="color: #FF6B6B;">STQ</span>
+          <span class="sub" style="color: #FF9999;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Change the logo colors outside the brand palette</p>
+      </div>
+
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div class="logo-text" style="font-size: 18px; transform: skewX(-12deg);">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+          <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Distort, skew, or rotate the logo</p>
+      </div>
+
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div class="logo-text" style="font-size: 18px; opacity: 0.3;">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+          <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Reduce opacity on the primary logo (use watermark SVG instead)</p>
+      </div>
+
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div class="logo-text" style="font-size: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+          <span class="mark" style="color: #1B2E4B;">STQ</span>
+          <span class="sub" style="color: #6B7280;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Add drop shadows or visual effects to the logo</p>
+      </div>
+
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div class="logo-text" style="font-size: 18px;">
+          <span class="mark" style="color: #1B2E4B; font-family: 'Times New Roman', serif;">STQ</span>
+          <span class="sub" style="color: #6B7280; font-family: 'Times New Roman', serif;">/ Capital Partners</span>
+        </div>
+        <p class="do-dont-desc">Substitute the typeface — always use Chakra Petch</p>
+      </div>
+
+      <div class="do-dont-card dont-card">
+        <span class="do-dont-label dont-label">✗ Don't</span>
+        <div style="background: linear-gradient(135deg, #FFD700, #FF6B6B); border-radius: 8px; padding: 12px 20px;">
+          <div class="logo-text" style="font-size: 18px;">
+            <span class="mark" style="color: white;">STQ</span>
+            <span class="sub" style="color: rgba(255,255,255,0.7);">/ Capital Partners</span>
+          </div>
+        </div>
+        <p class="do-dont-desc">Place the logo on patterned or gradient backgrounds</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- WATERMARK                                      -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="watermark">
+  <div class="container">
+    <h2>06 — Watermark</h2>
+    <h3>Background Watermark Usage</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      The STQ watermark adds subtle brand presence to layouts and documents. 
+      Use it as a large-scale background element at very low opacity.
+    </p>
+
+    <div class="watermark-demo">
+      <div class="watermark-content">
+        <p class="body-text" style="max-width: 400px; margin: 0 auto;">
+          The watermark uses the STQ icon mark at 3–5% opacity. 
+          It should be centered or positioned in the lower-right quadrant of the layout. 
+          Never use it where it interferes with readability.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 32px;">
+      <div>
+        <div class="watermark-demo" style="background: var(--navy); min-height: 200px;">
+          <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 140px; color: rgba(240,239,235,0.05); pointer-events: none; user-select: none;">STQ</div>
+          <div class="watermark-content">
+            <p style="color: #9CA3AF; font-size: 14px;">On dark backgrounds — cream at 5% opacity</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="watermark-demo" style="min-height: 200px;">
+          <div class="watermark-content">
+            <p style="color: var(--muted); font-size: 14px;">On light backgrounds — navy at 4% opacity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; padding: 32px;">
+      <h4 style="font-size: 15px; margin-bottom: 12px;">Watermark Specifications</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px;">
+        <div>
+          <p class="body-text"><strong>Opacity:</strong> 3–5% maximum</p>
+        </div>
+        <div>
+          <p class="body-text"><strong>Color:</strong> Navy on light, Cream on dark</p>
+        </div>
+        <div>
+          <p class="body-text"><strong>Scale:</strong> At least 2× the content area width</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ASSETS                                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<section style="background: var(--cream-dark);">
+  <div class="container">
+    <h2>07 — Assets</h2>
+    <h3>Brand Files</h3>
+    <p class="lead" style="margin-bottom: 40px;">
+      All logo files are included in the brand kit as production-ready SVGs.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+      <div style="background: var(--white); border-radius: 12px; padding: 24px; text-align: center;">
+        <div style="font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">logo-light.svg</div>
+        <p class="caption" style="margin-top: 0;">Light backgrounds</p>
+      </div>
+      <div style="background: var(--white); border-radius: 12px; padding: 24px; text-align: center;">
+        <div style="font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">logo-dark.svg</div>
+        <p class="caption" style="margin-top: 0;">Dark backgrounds</p>
+      </div>
+      <div style="background: var(--white); border-radius: 12px; padding: 24px; text-align: center;">
+        <div style="font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">logo-icon.svg</div>
+        <p class="caption" style="margin-top: 0;">Icon mark</p>
+      </div>
+      <div style="background: var(--white); border-radius: 12px; padding: 24px; text-align: center;">
+        <div style="font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px;">logo-watermark.svg</div>
+        <p class="caption" style="margin-top: 0;">Background use</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FOOTER                                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="logo-text">
+      <span class="mark" style="color: #F0EFEB;">STQ</span>
+      <span class="sub" style="color: #9CA3AF;">/ Capital Partners</span>
+    </div>
+    <p style="margin-top: 8px;">Brand Guidelines v1.0 — April 2026</p>
+    <p style="margin-top: 4px; font-size: 11px; color: #6B7280;">Confidential. For internal and approved vendor use only.</p>
+  </div>
+</footer>
+
+</body>
+</html>

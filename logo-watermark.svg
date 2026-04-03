@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&amp;display=swap');
+  </style>
+  <text font-family="'Chakra Petch', sans-serif" font-weight="700" font-size="200" fill="#1B2E4B" opacity="0.04" text-anchor="middle" dominant-baseline="central" x="300" y="155">STQ</text>
+</svg>

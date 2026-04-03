@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 48" width="360" height="48">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&amp;display=swap');
+  </style>
+  <text font-family="'Chakra Petch', sans-serif" font-size="36" dominant-baseline="central" y="24">
+    <tspan font-weight="700" fill="#1B2E4B">STQ</tspan>
+    <tspan font-weight="400" fill="#6B7280" dx="4">/ Capital Partners</tspan>
+  </text>
+</svg>
