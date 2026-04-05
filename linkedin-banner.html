@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #333; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  
+  .banner {
+    width: 1584px;
+    height: 396px;
+    background: #F0EFEB;
+    position: relative;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Grid lines */
+  .banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(27,46,75,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(27,46,75,0.04) 1px, transparent 1px);
+    background-size: 66px 66px;
+    pointer-events: none;
+  }
+
+  /* Watermark */
+  .watermark {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 280px;
+    font-weight: 700;
+    color: #1B2E4B;
+    opacity: 0.04;
+    letter-spacing: -5px;
+    line-height: 1;
+  }
+
+  .content {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .logo {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1B2E4B;
+    margin-bottom: 20px;
+  }
+
+  .logo span {
+    font-weight: 400;
+    color: #6B7280;
+  }
+
+  .tagline {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #1B2E4B;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6B7280;
+    letter-spacing: 0.5px;
+    max-width: 500px;
+    line-height: 1.5;
+  }
+
+  .accent-line {
+    width: 50px;
+    height: 3px;
+    background: #1B2E4B;
+    opacity: 0.2;
+    margin-bottom: 20px;
+  }
+
+  .pills {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .pill {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1B2E4B;
+    opacity: 0.3;
+    border: 1px solid rgba(27,46,75,0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="watermark">STQ</div>
+    <div class="content">
+      <div class="logo">STQ <span>/ Capital Partners</span></div>
+      <div class="accent-line"></div>
+      <div class="tagline">Tax-aware strategies.<br>After-tax results.</div>
+      <div class="sub">Quantitative wealth advisory for high earners who refuse to overpay in taxes.</div>
+      <div class="pills">
+        <div class="pill">Tax Strategy</div>
+        <div class="pill">Options</div>
+        <div class="pill">Independence</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
